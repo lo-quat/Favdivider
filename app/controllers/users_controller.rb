@@ -15,6 +15,7 @@ class UsersController < ApplicationController
     session[:oauth_token] = auth[:credentials][:token]
     current_user.access_token_secret = auth[:credentials][:secret]
     session[:oauth_token_secret] = auth[:credentials][:secret]
+    current_user.save
     redirect_to edit_user_url(current_user)
   end
 

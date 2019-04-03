@@ -9,7 +9,7 @@
   <%= f.submit "更新" %>
 <% end %>
 
-<% if session[:oauth_token_secret]  %>
+<% if current_user.authenticated?  %>
   <p>連携済み</p>
 <% else %>
   <%= link_to "Twitter連携", '/auth/twitter' %>
