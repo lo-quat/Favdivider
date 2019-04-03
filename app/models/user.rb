@@ -5,6 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   def authenticated?
-    !!self.access_token_secret
+    access_token_secret.present?
   end
 end
