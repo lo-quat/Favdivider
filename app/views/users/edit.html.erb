@@ -11,6 +11,8 @@
 
 <% if current_user.authenticated?  %>
   <p>連携済み</p>
+  <%= link_to "TweetFetch",users_tweet_fetch_path %>
 <% else %>
   <%= link_to "Twitter連携", '/auth/twitter' %>
 <% end %>
+
