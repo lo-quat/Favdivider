@@ -10,7 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_02_025854) do
+ActiveRecord::Schema.define(version: 2019_04_06_071403) do
+
+  create_table "tweet_images", force: :cascade do |t|
+    t.string "tweetimage_url"
+    t.integer "tweet_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tweet_id"], name: "index_tweet_images_on_tweet_id"
+  end
+
+  create_table "tweets", force: :cascade do |t|
+    t.string "post_id"
+    t.datetime "post_created_at"
+    t.string "text"
+    t.integer "favorite_count"
+    t.integer "retweet_count"
+    t.string "postuser_id"
+    t.string "postuser_name"
+    t.string "postuser_screen_name"
+    t.string "profile_description"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_tweets_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
@@ -25,6 +49,7 @@ ActiveRecord::Schema.define(version: 2019_04_02_025854) do
     t.datetime "remember_created_at"
     t.string "first_name"
     t.string "last_name"
+    t.integer "twitter_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
