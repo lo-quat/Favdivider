@@ -24,6 +24,10 @@ class UsersController < ApplicationController
     redirect_to edit_user_url(current_user)
   end
 
+  def tweet_list
+    @tweets = current_user.tweets
+  end
+
 
   private
 
