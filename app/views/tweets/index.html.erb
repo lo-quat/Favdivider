@@ -1,6 +1,9 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-8 col-md-offset-4">
+    <div class="col-md-4">
+      <%= link_to("いいね多い順",controller: :tweets,action: :index,sort: 1) %>
+    </div>
+    <div class="col-md-8">
       <% @tweets.each do |tweet| %>
         <div class="well-sm well">
           <%= tweet.user_id %> @<%= tweet.postuser_screen_name %><br/>
