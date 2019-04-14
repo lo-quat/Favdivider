@@ -16,6 +16,7 @@
               <%= image_tag(image.tweetimage_url, size: 50) %>
             <% end %>
           <% end %>
+          <br><%= link_to 'clip',tweet_path(tweet),method: :patch %>
         </div>
       <% end %>
     </div>
