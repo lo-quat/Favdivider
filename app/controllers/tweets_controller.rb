@@ -6,4 +6,9 @@ class TweetsController < ApplicationController
       @tweets = current_user.tweets
     end
   end
+
+  def update
+    Tweet.find_by(id: params[:id]).cliped!
+    redirect_to(tweets_path)
+  end
 end
