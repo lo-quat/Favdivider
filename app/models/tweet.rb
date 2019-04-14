@@ -1,5 +1,5 @@
 class Tweet < ApplicationRecord
-  enum status: { normal: 0, cliped: 1 }
+  enum status: { default: 0, cliped: 1 }
   has_many :tweet_images, dependent: :destroy
   belongs_to :user
 
