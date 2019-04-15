@@ -44,4 +44,8 @@ class Tweet < ApplicationRecord
     rescue
     render :action => 'users/edit'
   end
+
+  def self.search(id,search)
+    Tweet.where(user_id: id).where("text LIKE ?", "#{search}%")
+  end
 end
