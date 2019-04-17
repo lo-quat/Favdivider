@@ -6,10 +6,10 @@ RSpec.describe Tweet, type: :model do
     create(:tweet1)
     create(:tweet2)
     create(:tweet3)
-    results = Tweet.search(user.id,'abc')
-    expect(results.count).to eq (2)
+    results = Tweet.search(user.id,'abc',10)
+    expect(results.count).to eq (1)
     results.each do |result|
-      expect(result.text.start_with?('abc')).to eq true
+      expect(result.text.start_with?('abc')&&result.favorite_count >= 10).to eq true
     end
   end
 end

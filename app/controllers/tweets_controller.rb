@@ -1,7 +1,7 @@
 class TweetsController < ApplicationController
   def index
     search = params[:search]
-    number = params[:number]
+    number = params[:number].to_i
     if search || number
       @tweets = Tweet.search(current_user.id, search,number)
     elsif params[:sort]
