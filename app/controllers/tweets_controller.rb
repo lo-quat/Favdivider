@@ -1,7 +1,9 @@
 class TweetsController < ApplicationController
   def index
-    if search = params[:search]
-      @tweets = Tweet.search(current_user.id, search)
+    search = params[:search]
+    number = params[:number]
+    if search || number
+      @tweets = Tweet.search(current_user.id, search,number)
     elsif params[:sort]
       @tweets = current_user.tweets.order("favorite_count DESC")
     else
