@@ -12,6 +12,7 @@ FactoryBot.define do
   factory :tweet2, class: Tweet do
     user_id {1}
     text {"defgabc"}
+    favorite_count {5}
   end
   factory :tweet3, class: Tweet do
     user_id {1}

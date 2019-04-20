@@ -4,34 +4,81 @@ RSpec.describe Tweet, type: :model do
 
   before do
     @user = create(:user)
-    create(:tweet1)
-    create(:tweet2)
-    create(:tweet3)
   end
 
-  it 'ツイートテキストといいね数両方の指定で検索結果の件数,内容が正しいか' do
-    results = Tweet.search(@user.id, {tweet_text: 'abc', like_num: 10})
-    expect(results.count).to eq (1)
-    results.each do |result|
-      expect(result.text.start_with?('abc') && result.favorite_count >= 10).to eq true
+  describe "#search" do
+
+    context "テキスト検索" do
+      context "検索結果が存在する場合" do
+        let!(:tweet1) {create(:tweet1)}
+        let!(:tweet2) {create(:tweet2)}
+        it "件数、内容が正しいか" do
+          results = Tweet.search(@user.id, {tweet_text: 'abc'})
+          expect(results.count).to eq (1)
+          expect(results.first.text.start_with?('abc')).to eq(true)
+        end
+      end
+
+      context "検索結果が存在しない場合" do
+        let!(:tweet1) {create(:tweet1)}
+        let!(:tweet2) {create(:tweet2)}
+        it "該当ツイートが存在しないか" do
+          results = Tweet.search(@user.id, {tweet_text: 'rfb'})
+          expect(results.count).to eq(0)
+        end
+      end
     end
-  end
 
-  it 'ツイートテキストのみの指定で検索結果の件数,内容が正しいか' do
-    results = Tweet.search(@user.id, {tweet_text: 'abc'})
-    expect(results.count).to eq (2)
-    results.each do |result|
-      expect(result.text.start_with?('abc')).to eq true
+    context "ライク検索" do
+      context "検索結果が存在する場合" do
+        let!(:tweet1) {create(:tweet1)}
+        let!(:tweet3) {create(:tweet3)}
+        it '件数、内容が正しいか' do
+          results = Tweet.search(@user.id, {like_num: 10})
+          expect(results.count).to eq (1)
+          expect(results.first.favorite_count >= 10).to eq(true)
+        end
+      end
+
+      context "検索結果が存在しない場合" do
+        let!(:tweet1) {create(:tweet1)}
+        let!(:tweet3) {create(:tweet3)}
+        it '該当ツイートが存在しないか' do
+          results = Tweet.search(@user.id, {like_num: 20})
+          expect(results.count).to eq (0)
+        end
+      end
     end
-  end
 
-  it 'いいね数のみの指定で検索結果の件数,内容が正しいか' do
-    results = Tweet.search(@user.id, {like_num: 10})
-    expect(results.count).to eq (1)
-  end
+    context "複合検索" do
+      context "検索結果が存在する場合" do
+        let!(:tweet1) {create(:tweet1)}
+        let!(:tweet3) {create(:tweet3)}
+        it '件数、内容が正しいか' do
+          results = Tweet.search(@user.id, {tweet_text: 'abc',like_num: 10})
+          expect(results.count).to eq (1)
+          expect(results.first.text.start_with?('abc') && results.first.favorite_count >= 10).to eq(true)
+        end
+      end
 
-  it '検索指定条件なし' do
-    results = Tweet.search(@user.id)
-    expect(results.count).to eq (3)
+      context "検索結果が存在しない場合" do
+        let!(:tweet1) {create(:tweet1)}
+        let!(:tweet3) {create(:tweet3)}
+        it '該当ツイートが存在しないか' do
+          results = Tweet.search(@user.id,{tweet_text: 'abc',like_num: 100})
+          expect(results.count).to eq (0)
+        end
+      end
+    end
+
+    context "検索条件の指定がない場合" do
+      let!(:tweet1) {create(:tweet1)}
+      let!(:tweet2) {create(:tweet2)}
+      let!(:tweet3) {create(:tweet3)}
+      it '全件のツイートが表示されるか' do
+        results = Tweet.search(@user.id)
+        expect(results.count).to eq(3)
+      end
+    end
   end
 end
