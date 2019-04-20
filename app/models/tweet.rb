@@ -45,11 +45,17 @@ class Tweet < ApplicationRecord
     render :action => 'users/edit'
   end
 
-  def self.search(user_id,tweet_text,like_num)
-    if tweet_text
-      Tweet.where(user_id: user_id).where("text LIKE ?", "#{tweet_text}%").where('favorite_count >= ?', like_num)
-    elsif tweet_text.nil?
-      Tweet.where(user_id: user_id).where('favorite_count >= ?',like_num)
+  def self.search(user_id, queries={})
+    tweets = Tweet.where(user_id: user_id)
+    return tweets if tweets.blank?
+
+    if queries[:tweet_text].present?
+      tweets = tweets.where("text LIKE ?", "#{queries[:tweet_text]}%")
     end
+
+    if queries[:like_num].present?
+      tweets = tweets.where(favorite_count: queries[:like_num].to_i..Float::INFINITY)
+    end
+    tweets
   end
 end

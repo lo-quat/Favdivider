@@ -3,6 +3,7 @@ FactoryBot.define do
     email {"test@gmail.com"}
     password {"foobar"}
   end
+
   factory :tweet1, class: Tweet do
     user_id {1}
     text {"abcdefg"}
