@@ -11,4 +11,7 @@ class TweetsController < ApplicationController
     Tweet.find_by(id: params[:id]).cliped!
     redirect_to(tweets_path)
   end
+
+  def edit
+  end
 end
