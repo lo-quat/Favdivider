@@ -13,9 +13,12 @@ RSpec.describe Tweet, type: :model do
         let!(:tweet1) {create(:tweet1)}
         let!(:tweet2) {create(:tweet2)}
         let!(:results){Tweet.search(@user.id, {tweet_text: 'abc'})}
-        it "件数が正しいこと、内容が正しいこと" do
+        it "件数が正しいこと" do
           expect(results.count).to eq (1)
-          expect(results.first.text.start_with?('abc')).to eq(true)
+        end
+
+        it "内容が正しいこと" do
+          expect(results.first.id).to eq(tweet1.id)
         end
       end
 
@@ -34,9 +37,11 @@ RSpec.describe Tweet, type: :model do
         let!(:tweet1) {create(:tweet1)}
         let!(:tweet3) {create(:tweet3)}
         let!(:results){Tweet.search(@user.id, {like_num: 10})}
-        it "件数が正しいこと、内容が正しいこと" do
+        it "件数が正しいこと" do
           expect(results.count).to eq (1)
-          expect(results.first.favorite_count >= 10).to eq(true)
+        end
+        it "内容が正しいこと" do
+          expect(results.first.id).to eq(tweet1.id)
         end
       end
 
@@ -55,9 +60,11 @@ RSpec.describe Tweet, type: :model do
         let!(:tweet1) {create(:tweet1)}
         let!(:tweet3) {create(:tweet3)}
         let!(:results){Tweet.search(@user.id, {tweet_text: 'abc',like_num: 10})}
-        it "件数が正しいこと、内容が正しいこと" do
+        it "件数が正しいこと" do
           expect(results.count).to eq (1)
-          expect(results.first.text.start_with?('abc') && results.first.favorite_count >= 10).to eq(true)
+        end
+        it "内容が正しいこと" do
+          expect(results.first.id).to eq(tweet1.id)
         end
       end
 
