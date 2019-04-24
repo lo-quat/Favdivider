@@ -1,9 +1,18 @@
 <div class="container">
   <div class="row">
     <div class="col-md-4">
+      ツイート検索
+      <%= form_tag(tweets_path,method: :get) do %>
+        <%= text_field_tag :tweet_text,'',placeholder: "検索ワード" %>を含むツイート<br/>
+        <%= number_field_tag :like_num,'',placeholder: "いいね数"%>いいね以上<br/>
+        <%= submit_tag 'Search', name: nil %>
+        <%= hidden_field_tag :search, true %>
+      <% end %>
       <%= link_to("いいね多い順",tweets_path(params: { sort: 1 })) %>
     </div>
     <div class="col-md-8">
+      <p>ツイート数</p>
+      <%= @tweets.count %>
       <% @tweets.each do |tweet| %>
         <div class="well-sm well">
           <%= tweet.user_id %> @<%= tweet.postuser_screen_name %><br/>
