@@ -1,0 +1,6 @@
+<%= form_for(@tweet.relationships.build) do |f| %>
+  <%= f.label :"Category" %>
+  <%= f.collection_select :category, Category.all,:id,:name ,prompt: true %>
+  <%= f.submit "Registrate" %>
+  <%= hidden_field_tag :tweet, @tweet.id %>
+<% end %>

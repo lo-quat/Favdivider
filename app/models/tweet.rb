@@ -1,6 +1,8 @@
 class Tweet < ApplicationRecord
   enum status: { default: 0, cliped: 1 }
   has_many :tweet_images, dependent: :destroy
+  has_many :relationships
+  has_many :categories, through: :relationships
   belongs_to :user
 
   def self.fetch(user)

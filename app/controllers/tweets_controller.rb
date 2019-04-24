@@ -13,5 +13,6 @@ class TweetsController < ApplicationController
   end
 
   def edit
+    @tweet = Tweet.find_by(id: params[:id])
   end
 end
