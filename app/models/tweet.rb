@@ -4,6 +4,7 @@ class Tweet < ApplicationRecord
   has_many :relationships
   has_many :categories, through: :relationships
   belongs_to :user
+  validates :relationships ,length: {maximum: 3}
 
   def self.fetch(user)
 

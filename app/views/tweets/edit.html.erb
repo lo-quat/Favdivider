@@ -1,5 +1,12 @@
 <%= form_for(@tweet.relationships.build) do |f| %>
   <%= f.label :"Category" %>
-  <%= f.collection_select :category, Category.all,:id,:name ,prompt: true %>
+  <%= f.collection_select :category, Category.all, :id, :name, prompt: true %>
   <%= f.submit "Register" %>
+  <%= f.hidden_field :tweet_id, value: @tweet.id %>
+<% end %>
+<% if @tweet.categories %>
+  <section>追加済みカテゴリー一覧</section>
+  <% @tweet.categories.each do |category| %>
+    <p><%= category.name %></p>
+  <% end %>
 <% end %>

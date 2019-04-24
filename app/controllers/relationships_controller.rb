@@ -1,7 +1,9 @@
 class RelationshipsController < ApplicationController
 
   def create
-    @relationship = Relationship.new(category_id: 6,tweet_id: 1)#6　と　1 指定で試す
-    @relationship.save
+    relationship = Relationship.new(category_id: params[:relationship][:category],
+                                    tweet_id: params[:relationship][:tweet_id])
+    relationship.save
+    redirect_to edit_tweet_url(params[:relationship][:tweet_id])
   end
 end

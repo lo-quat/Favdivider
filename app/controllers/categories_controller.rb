@@ -7,6 +7,6 @@ class CategoriesController < ApplicationController
   def create
     @category = Category.new(name: params[:category][:name])
     @category.save
-    redirect_to tweets_url
+    redirect_to new_category_url
   end
 end

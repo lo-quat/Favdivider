@@ -14,10 +14,8 @@ ActiveRecord::Schema.define(version: 2019_04_22_154229) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
-    t.integer "tweet_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["tweet_id"], name: "index_categories_on_tweet_id"
   end
 
   create_table "relationships", force: :cascade do |t|

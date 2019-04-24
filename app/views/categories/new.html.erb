@@ -3,3 +3,7 @@
   <%= f.text_field :name, placeholder: "Category Name" %>
   <%= f.submit "Registrate" %>
 <% end %>
+<section>登録済みカテゴリー</section>
+<% Category.all.each do |category| %>
+  <p><%= category.name %></p>
+<% end %>
