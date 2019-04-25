@@ -5,7 +5,7 @@ class CategoriesController < ApplicationController
   end
 
   def create
-    @category = Category.new(name: params[:category][:name])
+    @category = current_user.categories.new(name: params[:category][:name])
     @category.save
     redirect_to new_category_url
   end

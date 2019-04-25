@@ -15,6 +15,6 @@ class TweetsController < ApplicationController
   end
 
   def edit
-    @tweet = Tweet.find_by(id: params[:id])
+    @tweet = current_user.tweets.find(params[:id])
   end
 end

@@ -4,6 +4,6 @@
   <%= f.submit "Registrate" %>
 <% end %>
 <section>登録済みカテゴリー</section>
-<% Category.all.each do |category| %>
+<% current_user.categories.each do |category| %>
   <p><%= category.name %></p>
 <% end %>
