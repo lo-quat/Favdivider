@@ -10,11 +10,18 @@ class TweetsController < ApplicationController
   end
 
   def update
-    Tweet.find_by(id: params[:id]).cliped!
-    redirect_to(tweets_path)
+    relationship = Relationship.new(category_id: params[:relationship][:category],
+                                    tweet_id: params[:relationship][:tweet_id])
+    relationship.save
+    redirect_to edit_tweet_url(params[:relationship][:tweet_id])
   end
 
   def edit
     @tweet = current_user.tweets.find(params[:id])
+  end
+
+  def clip
+    Tweet.find_by(id: params[:id]).cliped!
+    redirect_to(tweets_path)
   end
 end
