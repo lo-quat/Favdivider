@@ -9,6 +9,7 @@
         <%= hidden_field_tag :search, true %>
       <% end %>
       <%= link_to("いいね多い順",tweets_path(params: { sort: 1 })) %>
+
     </div>
     <div class="col-md-8">
       <p>ツイート数</p>
@@ -25,7 +26,8 @@
               <%= image_tag(image.tweetimage_url, size: 50) %>
             <% end %>
           <% end %>
-          <br><%= link_to 'clip',tweet_path(tweet),method: :patch %>
+          <br><%= link_to 'clip',clip_path(tweet),method: :patch %>
+          <%= link_to 'カテゴリー追加',edit_tweet_path(tweet) %>
         </div>
       <% end %>
     </div>

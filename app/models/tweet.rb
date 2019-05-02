@@ -1,7 +1,13 @@
 class Tweet < ApplicationRecord
   enum status: { default: 0, cliped: 1 }
   has_many :tweet_images, dependent: :destroy
+  has_many :relationships
+  accepts_nested_attributes_for :relationships
+  has_many :categories, through: :relationships
   belongs_to :user
+
+  validates :relationships ,length: {maximum: 3}
+
 
   def self.fetch(user)
 
@@ -42,7 +48,6 @@ class Tweet < ApplicationRecord
       end
     end
     rescue
-    render :action => 'users/edit'
   end
 
   def self.search(user_id, queries={})
@@ -57,5 +62,10 @@ class Tweet < ApplicationRecord
       tweets = tweets.where(favorite_count: queries[:like_num].to_i..Float::INFINITY)
     end
     tweets
+  end
+
+  def self.postuser_name_all(current_user)
+    postuser_name_all = current_user.tweets.group(:postuser_name)
+    postuser_name_all.pluck(:postuser_name)
   end
 end
