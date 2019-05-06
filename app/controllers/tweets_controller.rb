@@ -3,7 +3,7 @@ class TweetsController < ApplicationController
     if params[:search].present?
       @tweets = Tweet.search(current_user.id, {tweet_text: params[:tweet_text], like_num: params[:like_num]})
     elsif params[:sort]
-      @tweets = current_user.tweets.order("favorite_count DESC")
+      @tweets = current_user.tweets.order(favorite_count: "DESC")
     else
       @tweets = current_user.tweets
     end
@@ -14,7 +14,6 @@ class TweetsController < ApplicationController
   def edit
     @tweet = current_user.tweets.find(params[:id])
     @relationship = @tweet.relationships.new
-    #@tweet.relationships.new
   end
 
   def update
