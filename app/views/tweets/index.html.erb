@@ -16,6 +16,7 @@
       <%= @tweets.count %>
       <% @tweets.each do |tweet| %>
         <div class="well-sm well">
+          <%= image_tag(tweet.postuser_profile_image,size: 50) %><br/>
           <%= tweet.user_id %> @<%= tweet.postuser_screen_name %><br/>
           <%= tweet.text %><br/>
           RT <%= tweet.retweet_count %> いいね <%= tweet.favorite_count %><br/>

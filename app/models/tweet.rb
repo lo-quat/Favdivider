@@ -36,7 +36,8 @@ class Tweet < ApplicationRecord
             postuser_id: tweet.user.id,
             postuser_name: tweet.user.name,
             postuser_screen_name: tweet.user.screen_name,
-            profile_description: tweet.user.description
+            profile_description: tweet.user.description,
+            postuser_profile_image: tweet.user.profile_image_url_https
         )
         #ツイートに画像があれば保存
         if tweet.media?
