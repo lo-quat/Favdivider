@@ -24,7 +24,22 @@ class Tweet < ApplicationRecord
         tweet.destroy!
       end
 
-      tweets = client.favorites(count: 200, tweet_mode: "extended")
+      def collect_with_max_id(collection=[], max_id=nil, &block)
+        response = yield(max_id)
+        collection += response
+        response.empty? ? collection.flatten : collect_with_max_id(collection, response.last.id - 1, &block)
+      end
+
+      # いいね全件取得
+      def client.get_all_favorites(user)
+        collect_with_max_id do |max_id|
+          options = {count: 200,tweet_mode: "extended"}
+          options[:max_id] = max_id unless max_id.nil?
+          favorites(user, options)
+        end
+      end
+
+      tweets = client.get_all_favorites(user.twitter_id)
 
       tweets.each do |tweet|
         _tweet = user.tweets.new(
