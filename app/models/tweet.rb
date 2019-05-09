@@ -80,9 +80,8 @@ class Tweet < ApplicationRecord
     tweets
   end
 
-  def self.postuser_name_all(current_user)
-    postuser_name_all = current_user.tweets.group(:postuser_name)
-    postuser_name_all.pluck(:postuser_name)
+  def self.post_users(current_user)
+    current_user.tweets.group(:postuser_name)
   end
 
   def self.new_tweet?(user_id, tweet_id)

@@ -7,8 +7,6 @@ class TweetsController < ApplicationController
     else
       @tweets = current_user.tweets
     end
-
-    @postuser_name_all = Tweet.postuser_name_all(current_user)
   end
 
   def edit
@@ -29,9 +27,17 @@ class TweetsController < ApplicationController
     redirect_to(tweets_path)
   end
 
+  def post_users
+    @post_users = Tweet.post_users(current_user)
+  end
+
+  def post_user_tweets
+    @tweets = Tweet.where(user_id: current_user, postuser_id: params[:postuser_id])
+  end
+
   private
 
   def tweet_params
-    params.require(:relationship).permit(:category_id,:tweet_id)
+    params.require(:relationship).permit(:category_id, :tweet_id)
   end
 end
