@@ -71,7 +71,7 @@ class Tweet < ApplicationRecord
     return tweets if tweets.blank?
 
     if queries[:tweet_text].present?
-      tweets = tweets.where("text LIKE ?", "#{queries[:tweet_text]}%")
+      tweets = tweets.where("text LIKE ?", "%#{queries[:tweet_text]}%")
     end
 
     if queries[:like_num].present?
