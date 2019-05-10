@@ -1,36 +1,32 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-4">
-      ツイート検索
-      <%= form_tag(tweets_path,method: :get) do %>
-        <%= text_field_tag :tweet_text,'',placeholder: "検索ワード" %>を含むツイート<br/>
-        <%= number_field_tag :like_num,'',placeholder: "いいね数"%>いいね以上<br/>
-        <%= submit_tag 'Search', name: nil %>
-        <%= hidden_field_tag :search, true %>
-      <% end %>
-      <%= link_to("いいね多い順",tweets_path(params: { sort: 1 })) %>
-      <%= link_to("ユーザー一覧",tweets_post_users_path)%>
-    </div>
-    <div class="col-md-8">
-      <p>ツイート数</p>
-      <%= @tweets.count %>
-      <% @tweets.each do |tweet| %>
-        <div class="well-sm well">
-          <%= image_tag(tweet.postuser_profile_image,size: 50) %><br/>
-          <%= tweet.user_id %> @<%= tweet.postuser_screen_name %><br/>
-          <%= tweet.text %><br/>
-          RT <%= tweet.retweet_count %> いいね <%= tweet.favorite_count %><br/>
-          Posted <%= time_ago_in_words(tweet.post_created_at) %> ago.<br/>
+<div class="col-md-4">
+  ツイート検索
+  <%= form_tag(tweets_path, method: :get) do %>
+    <%= text_field_tag :tweet_text, '', placeholder: "検索ワード" %>を含むツイート<br/>
+    <%= number_field_tag :like_num, '', placeholder: "いいね数" %>いいね以上<br/>
+    <%= submit_tag 'Search', name: nil %>
+    <%= hidden_field_tag :search, true %>
+  <% end %>
+  <%= link_to("いいね多い順", tweets_path(params: {sort: 1})) %>
+  <%= link_to("ユーザー一覧", post_users_path) %>
+</div>
+<div class="col-md-8">
+  <p>ツイート数</p>
+  <%= @tweets.count %>
+  <% @tweets.each do |tweet| %>
+    <div class="well-sm well">
+      <%= image_tag(tweet.postuser_profile_image, size: 50) %><br/>
+      <%= tweet.user_id %> @<%= tweet.postuser_screen_name %><br/>
+      <%= tweet.text %><br/>
+      RT <%= tweet.retweet_count %> いいね <%= tweet.favorite_count %><br/>
+      Posted <%= time_ago_in_words(tweet.post_created_at) %> ago.<br/>
 
-          <% if tweet.tweet_images %>
-            <% tweet.tweet_images.each do |image| %>
-              <%= image_tag(image.tweetimage_url, size: 50) %>
-            <% end %>
-          <% end %>
-          <br><%= link_to 'clip',clip_path(tweet),method: :patch %>
-          <%= link_to 'カテゴリー追加',edit_tweet_path(tweet) %>
-        </div>
+      <% if tweet.tweet_images %>
+        <% tweet.tweet_images.each do |image| %>
+          <%= image_tag(image.tweetimage_url, size: 50) %>
+        <% end %>
       <% end %>
+      <br><%= link_to 'clip', clip_path(tweet), method: :patch %>
+      <%= link_to 'カテゴリー追加', edit_tweet_path(tweet) %>
     </div>
-  </div>
+  <% end %>
 </div>

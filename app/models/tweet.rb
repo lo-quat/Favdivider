@@ -81,7 +81,7 @@ class Tweet < ApplicationRecord
   end
 
   def self.post_users(current_user)
-    current_user.tweets.group(:postuser_name)
+    current_user.tweets.group(:postuser_screen_name)
   end
 
   def self.new_tweet?(user_id, tweet_id)

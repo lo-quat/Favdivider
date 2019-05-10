@@ -11,6 +11,7 @@ class UsersController < ApplicationController
 
   def tweet_fetch
     Tweet.fetch(current_user)
+    redirect_to root_url
   end
 
   def callback
