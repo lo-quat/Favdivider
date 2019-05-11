@@ -36,7 +36,7 @@ class Tweet < ApplicationRecord
         end
       end
 
-      tweets = client.get_all_favorites(user.twitter_id)
+      tweets = client.get_all_favorites(user.uid)
 
 
       tweets.each do |tweet|

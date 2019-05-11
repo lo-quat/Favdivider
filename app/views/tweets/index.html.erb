@@ -27,7 +27,7 @@
   <div class="center jumbotron">
     <h1>Welcome to Favdivider</h1>
     <h2>This app is organize your favorites.</h2>
-    <%= link_to "Sign up now!", new_user_registration_path, class: "btn btn-lg btn-primary" %>
+    <%= link_to "Twitter Login", user_twitter_omniauth_authorize_path, class: "btn btn-lg btn-primary" %>
     <%= link_to "Sign in", new_user_session_path, class: "btn btn-lg btn-primary" %>
   </div>
 <% end %>

@@ -304,6 +304,7 @@ DEPENDENCIES
   jquery-rails
   jquery-ui-rails
   listen (>= 3.0.5, < 3.2)
+  omniauth
   omniauth-twitter
   puma (~> 3.11)
   rails (~> 5.2.2)
