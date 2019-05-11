@@ -77,11 +77,15 @@ class Tweet < ApplicationRecord
     if queries[:like_num].present?
       tweets = tweets.where(favorite_count: queries[:like_num].to_i..Float::INFINITY)
     end
+
+    #if queries[:category_id].present?
+    #  tweets.joins(:categories).where(categories: {category_id: queries[:category_id]})
+    #end
     tweets
   end
 
   def self.post_users(current_user)
-    current_user.tweets.group(:postuser_screen_name)
+    current_user.tweets.group(:postuser_id)
   end
 
   def self.new_tweet?(user_id, tweet_id)

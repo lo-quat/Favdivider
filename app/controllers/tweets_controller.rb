@@ -2,7 +2,9 @@ class TweetsController < ApplicationController
   def index
     if user_signed_in?
       if params[:search].present?
-        @tweets = Tweet.search(current_user.id, {tweet_text: params[:tweet_text], like_num: params[:like_num]})
+        @tweets = Tweet.search(current_user.id, {tweet_text: params[:tweet_text],
+                                                 like_num: params[:like_num],
+                                                 category_id: params[:category_id]})
       elsif params[:sort]
         @tweets = current_user.tweets.reorder(favorite_count: "DESC")
       else
