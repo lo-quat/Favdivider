@@ -8,35 +8,34 @@ class Tweet < ApplicationRecord
 
   validates :relationships, length: {maximum: 3}
 
-  default_scope -> { order(post_created_at: :DESC) }
+  default_scope -> {order(post_created_at: :DESC)}
 
 
   def self.fetch(user)
-      client = Twitter::REST::Client.new do |config|
-        config.consumer_key = ENV['APP_ID']
-        config.consumer_secret = ENV['APP_SECRET']
-        config.access_token = user.access_token
-        config.access_token_secret = user.access_token_secret
+    client = Twitter::REST::Client.new do |config|
+      config.consumer_key = ENV['APP_ID']
+      config.consumer_secret = ENV['APP_SECRET']
+      config.access_token = user.access_token
+      config.access_token_secret = user.access_token_secret
+    end
+
+    def collect_with_max_id(collection = [], max_id = nil, &block)
+      response = yield(max_id)
+      collection += response
+      response.empty? ? collection.flatten : collect_with_max_id(collection, response.last.id - 1, &block)
+    end
+
+    # いいね全件取得
+    def client.get_all_favorites(user)
+      collect_with_max_id do |max_id|
+        options = {count: 200, tweet_mode: "extended"}
+        options[:max_id] = max_id unless max_id.nil?
+        favorites(user, options)
       end
+    end
 
-      def collect_with_max_id(collection = [], max_id = nil, &block)
-        response = yield(max_id)
-        collection += response
-        response.empty? ? collection.flatten : collect_with_max_id(collection, response.last.id - 1, &block)
-      end
-
-      # いいね全件取得
-      def client.get_all_favorites(user)
-        collect_with_max_id do |max_id|
-          options = {count: 200, tweet_mode: "extended"}
-          options[:max_id] = max_id unless max_id.nil?
-          favorites(user, options)
-        end
-      end
-
-      tweets = client.get_all_favorites(user.uid)
-
-      Tweet.transaction do
+    tweets = client.get_all_favorites(user.uid)
+    Tweet.transaction do
       tweets.each do |tweet|
         if Tweet.new_tweet?(user.id, tweet.id)
           _tweet = user.tweets.new(
