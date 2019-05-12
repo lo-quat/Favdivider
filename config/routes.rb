@@ -8,5 +8,5 @@ Rails.application.routes.draw do
   get 'post_users', to: 'tweets#post_users'
   get 'post_user_tweets', to: 'tweets#post_user_tweets', as: 'post_user_tweets'
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
-  #get '/auth/:provider/callback', to: 'users#callback'
+    #get '/auth/:provider/callback', to: 'users#callback'
 end

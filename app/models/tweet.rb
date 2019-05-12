@@ -12,8 +12,6 @@ class Tweet < ApplicationRecord
 
 
   def self.fetch(user)
-
-    Tweet.transaction do
       client = Twitter::REST::Client.new do |config|
         config.consumer_key = ENV['APP_ID']
         config.consumer_secret = ENV['APP_SECRET']
@@ -38,7 +36,7 @@ class Tweet < ApplicationRecord
 
       tweets = client.get_all_favorites(user.uid)
 
-
+      Tweet.transaction do
       tweets.each do |tweet|
         if Tweet.new_tweet?(user.id, tweet.id)
           _tweet = user.tweets.new(
