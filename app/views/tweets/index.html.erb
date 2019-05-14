@@ -1,25 +1,27 @@
 <% if user_signed_in? %>
-  <div class="col-md-4">
-    <%= render 'tweets/search_form' %>
-  </div>
+  <%= render 'tweets/search_form' %>
   <div class="col-md-8">
     <p>ツイート数</p>
     <%= @tweets.count %>
     <% @tweets.each do |tweet| %>
-      <div class="well-sm well">
-        <%= image_tag(tweet.postuser_profile_image, size: 50) %><br/>
-        <%= tweet.user_id %> @<%= tweet.postuser_screen_name %><br/>
-        <%= tweet.text %><br/>
-        RT <%= tweet.retweet_count %> いいね <%= tweet.favorite_count %><br/>
-        Posted <%= time_ago_in_words(tweet.post_created_at) %> ago.<br/>
-
-        <% if tweet.tweet_images %>
+      <div class="tweets">
+        <li id="tweet-<%= tweet.id %>">
+          <%= image_tag(tweet.postuser_profile_image, size: 50) %>
+          <span class="user"><%= tweet.user_id %> @<%= tweet.postuser_screen_name %></span>
+        <span class="content">
+          <%= tweet.text %>
+          <% if tweet.tweet_images %>
           <% tweet.tweet_images.each do |image| %>
             <%= image_tag(image.tweetimage_url, size: 50) %>
           <% end %>
         <% end %>
-        <br><%= link_to 'clip', clip_path(tweet), method: :patch %>
-        <%= link_to 'カテゴリー追加', edit_tweet_path(tweet) %>
+        </span>
+          <span class="timestamp">
+            Posted <%= time_ago_in_words(tweet.post_created_at) %> ago.
+            <%= link_to 'clip', clip_path(tweet), method: :patch %>
+            <%= link_to 'カテゴリー追加', edit_tweet_path(tweet) %>
+          </span>
+        </li>
       </div>
     <% end %>
   </div>
