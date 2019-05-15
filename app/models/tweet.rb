@@ -75,9 +75,9 @@ class Tweet < ApplicationRecord
       tweets = tweets.where(favorite_count: queries[:like_num].to_i..Float::INFINITY)
     end
 
-    #if queries[:category_id].present?
-    #  tweets.joins(:categories).where(categories: {category_id: queries[:category_id]})
-    #end
+    if queries[:clip].present?
+      tweets = tweets.where(status: 1)
+    end
     tweets
   end
 

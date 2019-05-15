@@ -1,12 +1,13 @@
 <%= render 'tweets/search_form' %>
 <div class="col-md-8">
-  <%= @post_users.length %>
   <% @post_users.each do |post_user| %>
-    <div class="well-sm well">
-      <%= image_tag(post_user.postuser_profile_image, size: 50) %><br/>
-      @<%= post_user.postuser_screen_name %><br/>
-      <%= post_user.profile_description %>
-      <%= link_to '', post_user_tweets_path(postuser_id: post_user.postuser_id), 'aria-hidden': true %>
+    <div class="well post_users">
+      <%= image_tag(post_user.postuser_profile_image, size: 50) %>
+      <p>@<%= post_user.postuser_screen_name %></p>
+      <span>
+        <%= post_user.profile_description %>
+        <%= link_to '', post_user_tweets_path(postuser_id: post_user.postuser_id), 'aria-hidden': true %>
+      </span>
     </div>
   <% end %>
 </div>

@@ -4,24 +4,23 @@
     <p>ツイート数</p>
     <%= @tweets.count %>
     <% @tweets.each do |tweet| %>
-      <div class="tweets">
-        <li id="tweet-<%= tweet.id %>">
-          <%= image_tag(tweet.postuser_profile_image, size: 50) %>
-          <span class="user"><%= tweet.user_id %> @<%= tweet.postuser_screen_name %></span>
+      <div class="well well-sm tweets">
+        <%= image_tag(tweet.postuser_profile_image, size: 50) %>
+        <span class="user">@<%= tweet.postuser_screen_name %></span>
         <span class="content">
-          <%= tweet.text %>
+          <p><%= tweet.text %></p>
           <% if tweet.tweet_images %>
           <% tweet.tweet_images.each do |image| %>
             <%= image_tag(image.tweetimage_url, size: 50) %>
           <% end %>
         <% end %>
         </span>
-          <span class="timestamp">
-            Posted <%= time_ago_in_words(tweet.post_created_at) %> ago.
-            <%= link_to 'clip', clip_path(tweet), method: :patch %>
-            <%= link_to 'カテゴリー追加', edit_tweet_path(tweet) %>
-          </span>
-        </li>
+        <span class="status">
+          <p>Posted <%= time_ago_in_words(tweet.post_created_at) %> ago.</p>
+          <%= tweet.favorite_count %> likes
+          <%= link_to 'clip', clip_path(tweet), method: :patch %>
+          <%= link_to 'カテゴリー追加', edit_tweet_path(tweet) %>
+        </span>
       </div>
     <% end %>
   </div>
@@ -32,3 +31,4 @@
     <%= link_to "Twitter Login", user_twitter_omniauth_authorize_path, class: "btn btn-lg btn-primary" %>
   </div>
 <% end %>
+</br>
