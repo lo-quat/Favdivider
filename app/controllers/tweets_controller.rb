@@ -4,7 +4,8 @@ class TweetsController < ApplicationController
       if params[:search].present?
         @tweets = Tweet.search(current_user.id, {tweet_text: params[:tweet_text],
                                                  like_num: params[:like_num],
-                                                 clip: params[:clip]})
+                                                 clip: params[:clip],
+                                                 category_id: params[:category_id][0]})
       elsif params[:sort]
         @tweets = current_user.tweets.reorder(favorite_count: "DESC")
       else

@@ -78,6 +78,10 @@ class Tweet < ApplicationRecord
     if queries[:clip].present?
       tweets = tweets.where(status: 1)
     end
+
+    if queries[:category_id].present?
+      tweets = tweets.joins(:relationships).where(relationships: {category_id: queries[:category_id]})
+    end
     tweets
   end
 

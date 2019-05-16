@@ -11,7 +11,7 @@
           <p><%= tweet.text %></p>
           <% if tweet.tweet_images %>
           <% tweet.tweet_images.each do |image| %>
-            <%= image_tag(image.tweetimage_url, size: 50) %>
+            <%= link_to '' %><%= image_tag(image.tweetimage_url, size: 50) %>
           <% end %>
         <% end %>
         </span>
@@ -31,4 +31,4 @@
     <%= link_to "Twitter Login", user_twitter_omniauth_authorize_path, class: "btn btn-lg btn-primary" %>
   </div>
 <% end %>
-</br>
+<%= link_to image_tag("/assets/img-1.jpg", :size => "76x76"),'/assets/img-1.jpg',:rel => "lightbox"%>
