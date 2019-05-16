@@ -1,25 +1,26 @@
 <% if user_signed_in? %>
-  <div class="col-md-4">
-    <%= render 'tweets/search_form' %>
-  </div>
+  <%= render 'tweets/search_form' %>
   <div class="col-md-8">
     <p>ツイート数</p>
     <%= @tweets.count %>
     <% @tweets.each do |tweet| %>
-      <div class="well-sm well">
-        <%= image_tag(tweet.postuser_profile_image, size: 50) %><br/>
-        <%= tweet.user_id %> @<%= tweet.postuser_screen_name %><br/>
-        <%= tweet.text %><br/>
-        RT <%= tweet.retweet_count %> いいね <%= tweet.favorite_count %><br/>
-        Posted <%= time_ago_in_words(tweet.post_created_at) %> ago.<br/>
-
-        <% if tweet.tweet_images %>
+      <div class="well well-sm tweets">
+        <%= image_tag(tweet.postuser_profile_image, size: 50) %>
+        <span class="user">@<%= tweet.postuser_screen_name %></span>
+        <span class="content">
+          <p><%= tweet.text %></p>
+          <% if tweet.tweet_images %>
           <% tweet.tweet_images.each do |image| %>
-            <%= image_tag(image.tweetimage_url, size: 50) %>
+            <%= link_to '' %><%= image_tag(image.tweetimage_url, size: 50) %>
           <% end %>
         <% end %>
-        <br><%= link_to 'clip', clip_path(tweet), method: :patch %>
-        <%= link_to 'カテゴリー追加', edit_tweet_path(tweet) %>
+        </span>
+        <span class="status">
+          <p>Posted <%= time_ago_in_words(tweet.post_created_at) %> ago.</p>
+          <%= tweet.favorite_count %> likes
+          <%= link_to 'clip', clip_path(tweet), method: :patch %>
+          <%= link_to 'カテゴリー追加', edit_tweet_path(tweet) %>
+        </span>
       </div>
     <% end %>
   </div>
@@ -27,7 +28,7 @@
   <div class="center jumbotron">
     <h1>Welcome to Favdivider</h1>
     <h2>This app is organize your favorites.</h2>
-    <%= link_to "Sign up now!", new_user_registration_path, class: "btn btn-lg btn-primary" %>
-    <%= link_to "Sign in", new_user_session_path, class: "btn btn-lg btn-primary" %>
+    <%= link_to "Twitter Login", user_twitter_omniauth_authorize_path, class: "btn btn-lg btn-primary" %>
   </div>
 <% end %>
+<%= link_to image_tag("/assets/img-1.jpg", :size => "76x76"),'/assets/img-1.jpg',:rel => "lightbox"%>

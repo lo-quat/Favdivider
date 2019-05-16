@@ -1,18 +1,13 @@
-class UsersController < ApplicationController
-
-  def edit
-    @user = current_user
+class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+  def facebook
+    callback_from :facebook
   end
 
-  def update
-    @user = current_user
-    @user.update_attributes(user_params)
+  def twitter
+    callback_from :twitter
   end
 
-  def tweet_fetch
-    Tweet.fetch(current_user)
-    redirect_to root_url
-  end
+  private
 
   def callback_from(provider)
     provider = provider.to_s
