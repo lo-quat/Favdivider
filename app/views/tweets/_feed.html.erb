@@ -1,5 +1,5 @@
 <div class="col-md-8">
-  <p>ツイート数</p>
+  <p id="test">ツイート数</p>
   <%= @tweets.count %>
   <% @tweets.each do |tweet| %>
     <div class="well well-sm tweets">
@@ -16,7 +16,7 @@
       <span class="status">
           <p>Posted <%= time_ago_in_words(tweet.post_created_at) %> ago.</p>
         <%= tweet.favorite_count %> likes
-        <%= link_to 'clip', clip_path(tweet), method: :patch %>
+        <%= link_to image_tag('clip.png',size: 20), clip_path(tweet),method: :patch ,id: 'clip',remote: true %>
         <%= link_to 'カテゴリー追加', edit_tweet_path(tweet) %>
         </span>
     </div>
