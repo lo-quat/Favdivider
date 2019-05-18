@@ -86,7 +86,16 @@ p {
   .status {
     margin-left: 60px;
     display: block;
+
+    img:hover {
+      cursor: pointer;
+      filter: opacity(20%);
+    }
   }
+}
+
+.cliped {
+  filter: opacity(20%);
 }
 
 .post_users {
@@ -109,4 +118,5 @@ p {
 label {
   font-weight: normal !important;
 }
+
 

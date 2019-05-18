@@ -27,8 +27,9 @@ class TweetsController < ApplicationController
     end
   end
 
-  def clip
-    Tweet.find_by(id: params[:id]).cliped!
+  def toggle_clip
+    tweet = Tweet.find_by(id: params[:id])
+    tweet.toggle_clip!
     redirect_to tweets_path
   end
 

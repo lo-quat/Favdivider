@@ -16,7 +16,7 @@
       <span class="status">
           <p>Posted <%= time_ago_in_words(tweet.post_created_at) %> ago.</p>
         <%= tweet.favorite_count %> likes
-        <%= link_to image_tag('clip.png',size: 20), clip_path(tweet),method: :patch ,id: 'clip',remote: true %>
+        <%= link_to image_tag('clip.png',size: 20,id:'clip',data: {tweet_id: tweet.id}),toggle_clip_path(tweet),method: :patch %>
         <%= link_to 'カテゴリー追加', edit_tweet_path(tweet) %>
         </span>
     </div>
