@@ -12,13 +12,13 @@
             <%= image_tag(image.tweetimage_url, size: 50) %>
           <% end %>
         <% end %>
-        </span>
+      </span>
       <span class="status">
-          <p>Posted <%= time_ago_in_words(tweet.post_created_at) %> ago.</p>
+        <p>Posted <%= time_ago_in_words(tweet.post_created_at) %> ago.</p>
         <%= tweet.favorite_count %> likes
-        <%= link_to image_tag('clip.png',size: 20,id:'clip',data: {tweet_id: tweet.id}),toggle_clip_path(tweet),method: :patch %>
+        <%= image_tag 'clip.png',class: 'toggle_status',size: 15,data: {tweet_id: tweet.id,status: tweet.default?} %>
         <%= link_to 'カテゴリー追加', edit_tweet_path(tweet) %>
-        </span>
+      </span>
     </div>
   <% end %>
 </div>

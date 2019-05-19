@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :tweets,only: [:index,:update,:edit]
   resources :categories,only: [:new,:create]
   root 'tweets#index'
-  patch 'tweets/:id/clip',to:'tweets#toggle_clip', as: 'toggle_clip'
+  patch 'tweets/:id/clip',to:'tweets#toggle_status', as: 'toggle_status'
   get 'users/tweet_fetch', to: 'users#tweet_fetch'
   get 'post_users', to: 'tweets#post_users'
   get 'post_user_tweets', to: 'tweets#post_user_tweets', as: 'post_user_tweets'

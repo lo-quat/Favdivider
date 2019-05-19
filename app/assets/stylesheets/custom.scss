@@ -94,10 +94,6 @@ p {
   }
 }
 
-.cliped {
-  filter: opacity(20%);
-}
-
 .post_users {
   p {
     font-weight: bold;
@@ -117,6 +113,9 @@ p {
 
 label {
   font-weight: normal !important;
+}
+.cliped {
+  filter: opacity(20%);
 }
 
 

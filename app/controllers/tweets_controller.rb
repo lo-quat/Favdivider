@@ -1,4 +1,7 @@
 class TweetsController < ApplicationController
+
+  protect_from_forgery except: :toggle_status
+
   def index
     if user_signed_in?
       if params[:search].present?
@@ -27,10 +30,10 @@ class TweetsController < ApplicationController
     end
   end
 
-  def toggle_clip
+  def toggle_status
     tweet = Tweet.find_by(id: params[:id])
     tweet.toggle_clip!
-    redirect_to tweets_path
+    render body: nil
   end
 
   def post_users
