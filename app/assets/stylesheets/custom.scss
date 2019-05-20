@@ -114,8 +114,14 @@ p {
 label {
   font-weight: normal !important;
 }
-.cliped {
+
+.cliped{
   filter: opacity(20%);
+}
+.toggle_status {
+  &[data-status='false'] {
+    filter: opacity(20%);
+  }
 }
 
 
