@@ -1,29 +1,6 @@
 <% if user_signed_in? %>
   <%= render 'tweets/search_form' %>
-  <div class="col-md-8">
-    <p>ツイート数</p>
-    <%= @tweets.count %>
-    <% @tweets.each do |tweet| %>
-      <div class="well well-sm tweets">
-        <%= image_tag(tweet.postuser_profile_image, size: 50) %>
-        <span class="user">@<%= tweet.postuser_screen_name %></span>
-        <span class="content">
-          <p><%= tweet.text %></p>
-          <% if tweet.tweet_images %>
-          <% tweet.tweet_images.each do |image| %>
-            <%= link_to '' %><%= image_tag(image.tweetimage_url, size: 50) %>
-          <% end %>
-        <% end %>
-        </span>
-        <span class="status">
-          <p>Posted <%= time_ago_in_words(tweet.post_created_at) %> ago.</p>
-          <%= tweet.favorite_count %> likes
-          <%= link_to 'clip', clip_path(tweet), method: :patch %>
-          <%= link_to 'カテゴリー追加', edit_tweet_path(tweet) %>
-        </span>
-      </div>
-    <% end %>
-  </div>
+  <%= render 'tweets/feed' %>
 <% else %>
   <div class="center jumbotron">
     <h1>Welcome to Favdivider</h1>
@@ -31,4 +8,3 @@
     <%= link_to "Twitter Login", user_twitter_omniauth_authorize_path, class: "btn btn-lg btn-primary" %>
   </div>
 <% end %>
-<%= link_to image_tag("/assets/img-1.jpg", :size => "76x76"),'/assets/img-1.jpg',:rel => "lightbox"%>

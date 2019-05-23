@@ -1,4 +1,5 @@
 class TweetsController < ApplicationController
+
   def index
     if user_signed_in?
       if params[:search].present?
@@ -27,9 +28,12 @@ class TweetsController < ApplicationController
     end
   end
 
-  def clip
-    Tweet.find_by(id: params[:id]).cliped!
-    redirect_to tweets_path
+  def toggle_status
+    tweet = Tweet.find_by(id: params[:id])
+    tweet.toggle_clip!
+    respond_to do |format|
+      format.json{render json: {status: tweet.status}}
+    end
   end
 
   def post_users

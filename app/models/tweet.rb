@@ -92,4 +92,12 @@ class Tweet < ApplicationRecord
   def self.new_tweet?(user_id, tweet_id)
     Tweet.find_by(user_id: user_id, post_id: tweet_id).nil?
   end
+
+  def toggle_clip!
+    if default?
+      cliped!
+    else
+      default!
+    end
+  end
 end
