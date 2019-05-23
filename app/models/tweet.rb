@@ -34,7 +34,7 @@ class Tweet < ApplicationRecord
       end
     end
 
-    tweets = client.get_all_favorites(user.uid)
+    tweets = client.get_all_favorites(user.uid.to_i)
     Tweet.transaction do
       tweets.each do |tweet|
         if Tweet.new_tweet?(user.id, tweet.id)

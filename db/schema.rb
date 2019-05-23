@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(version: 2019_05_06_080645) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.integer "uid"
+    t.string "uid"
     t.string "provider"
     t.string "access_token"
     t.string "access_token_secret"
