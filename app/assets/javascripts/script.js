@@ -8,6 +8,9 @@ $(document).ready(function(){
         let id = $(this).data('tweet-id');
         localStorage.setItem('tweet-id',id);
         $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
             url: `/tweets/${id}/clip`,
             type: 'PATCH',
             dataType: 'json'

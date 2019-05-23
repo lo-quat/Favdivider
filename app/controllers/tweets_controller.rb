@@ -1,7 +1,5 @@
 class TweetsController < ApplicationController
 
-  protect_from_forgery except: :toggle_status
-
   def index
     if user_signed_in?
       if params[:search].present?
