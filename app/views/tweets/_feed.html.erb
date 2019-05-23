@@ -16,7 +16,7 @@
       <span class="status">
         <p>Posted <%= time_ago_in_words(tweet.post_created_at) %> ago.</p>
         <%= tweet.favorite_count %> likes
-        <%= image_tag 'clip.png',class: 'toggle_status',size: 15,data: {tweet_id: tweet.id,status: tweet.default?} %>
+        <%= image_tag 'clip.png', class: 'toggle_status', size: 15, data: {tweet_id: tweet.id, status: tweet.default?} %>
         <%= link_to 'カテゴリー追加', edit_tweet_path(tweet) %>
       </span>
     </div>
