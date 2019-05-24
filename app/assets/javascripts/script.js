@@ -1,5 +1,12 @@
 $(document).ready(function(){
 
+    const lightbox = lity();
+    $('img').click(function(e) {
+        if (e.target.src) {
+            lightbox(e.target.src);
+        }
+    });
+
     $('div.post_users').click(function () {
         location.href = $(this).find('a').attr('href');
     });
