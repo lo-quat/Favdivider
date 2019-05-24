@@ -80,6 +80,9 @@ p {
     img {
       display: inline-block;
       padding: 0 5px;
+      &:hover{
+        cursor: pointer;
+      }
     }
   }
 
