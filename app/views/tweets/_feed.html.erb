@@ -7,7 +7,10 @@
       <span class="user">@<%= tweet.postuser_screen_name %></span>
       <span class="content">
           <p><%= tweet.text %></p>
-        <% if tweet.tweet_images %>
+        <% if tweet.tweet_videos.present? %>
+          <%= link_to image_tag(tweet.tweet_images.first.tweetimage_url, size: 50),
+                      tweet.tweet_videos.first.tweet_video_url, data: {lity: "data-lity"} %>
+        <% elsif (tweet.tweet_images.present?) %>
           <% tweet.tweet_images.each do |image| %>
             <%= image_tag(image.tweetimage_url, size: 50) %>
           <% end %>
@@ -16,7 +19,8 @@
       <span class="status">
         <p>Posted <%= time_ago_in_words(tweet.post_created_at) %> ago.</p>
         <%= tweet.favorite_count %> likes
-        <%= image_tag 'clip.png', class: 'toggle_status', size: 15, data: {tweet_id: tweet.id, status: tweet.default?} %>
+        <%= image_tag 'clip.png', class: 'toggle_status', size: 15,
+                      data: {tweet_id: tweet.id, status: tweet.default?} %>
         <%= link_to 'カテゴリー追加', edit_tweet_path(tweet) %>
       </span>
     </div>
