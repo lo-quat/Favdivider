@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_06_080645) do
+ActiveRecord::Schema.define(version: 2019_05_25_100037) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -35,6 +35,14 @@ ActiveRecord::Schema.define(version: 2019_05_06_080645) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["tweet_id"], name: "index_tweet_images_on_tweet_id"
+  end
+
+  create_table "tweet_videos", force: :cascade do |t|
+    t.string "tweet_video_url"
+    t.integer "tweet_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tweet_id"], name: "index_tweet_videos_on_tweet_id"
   end
 
   create_table "tweets", force: :cascade do |t|

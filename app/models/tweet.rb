@@ -1,6 +1,7 @@
 class Tweet < ApplicationRecord
   enum status: {default: 0, cliped: 1}
   has_many :tweet_images, dependent: :destroy
+  has_many :tweet_videos, dependent: :destroy
   has_many :relationships, dependent: :destroy
   accepts_nested_attributes_for :relationships, allow_destroy: true
   has_many :categories, through: :relationships
@@ -50,9 +51,18 @@ class Tweet < ApplicationRecord
               profile_description: tweet.user.description,
               postuser_profile_image: tweet.user.profile_image_url_https
           )
-          #ツイートに画像があれば保存
           if tweet.media?
             tweet.media.each do |media|
+              if media.type == "video"
+                media.video_info.variants.each do |variant|
+                  if variant.content_type == "video/mp4"
+                    isBreak = true
+                    _tweet.tweet_videos.new(tweet_video_url: variant.url)
+                    break
+                  end
+                  break if isBreak
+                end
+              end
               _tweet.tweet_images.new(tweetimage_url: media.media_url_https)
             end
           end
