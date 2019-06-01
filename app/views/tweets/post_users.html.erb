@@ -1,5 +1,6 @@
 <%= render 'tweets/search_form' %>
 <div class="col-md-8">
+  ユーザー数 <%= @post_users.length %>
   <% @post_users.each do |post_user| %>
     <div class="well post_users">
       <%= image_tag(post_user.postuser_profile_image, size: 50) %>
