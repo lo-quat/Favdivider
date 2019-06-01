@@ -96,7 +96,7 @@ class Tweet < ApplicationRecord
   end
 
   def self.post_users(user)
-    user.tweets.group(:postuser_id,:tweets)
+    user.tweets.group(:postuser_id)
   end
 
   def self.new_tweet?(user_id, tweet_id)
