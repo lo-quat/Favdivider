@@ -106,7 +106,7 @@ class Tweet < ApplicationRecord
         :postuser_screen_name,
         :postuser_profile_image,
         :postuser_id
-    )
+    ).reorder(postuser_id: "DESC")
   end
 
   def self.new_tweet?(user_id, tweet_id)
