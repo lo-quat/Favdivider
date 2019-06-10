@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_many :tweets
+  has_many :post_users
   has_many :categories
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable

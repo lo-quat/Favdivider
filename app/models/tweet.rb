@@ -6,6 +6,7 @@ class Tweet < ApplicationRecord
   accepts_nested_attributes_for :relationships, allow_destroy: true
   has_many :categories, through: :relationships
   belongs_to :user
+  belongs_to :post_user
 
   validates :relationships, length: {maximum: 3}
 
@@ -39,18 +40,32 @@ class Tweet < ApplicationRecord
     Tweet.transaction do
       tweets.each do |tweet|
         if Tweet.new_tweet?(user.id, tweet.id)
-          _tweet = user.tweets.new(
-              post_id: tweet.id,
-              post_created_at: tweet.created_at,
-              text: tweet.attrs[:full_text],
-              favorite_count: tweet.favorite_count,
-              retweet_count: tweet.retweet_count,
-              postuser_id: tweet.user.id,
-              postuser_name: tweet.user.name,
-              postuser_screen_name: tweet.user.screen_name,
-              profile_description: tweet.user.description,
-              postuser_profile_image: tweet.user.profile_image_url_https
-          )
+          post_user = PostUser.exist_post_user(tweet.user.id)
+          if post_user
+            _tweet = post_user.tweets.new(
+                user_id: user.id,
+                post_id: tweet.id,
+                post_created_at: tweet.created_at,
+                text: tweet.attrs[:full_text],
+                favorite_count: tweet.favorite_count,
+                retweet_count: tweet.retweet_count,
+                )
+          else
+            _tweet = user.post_users.new(
+                uid: tweet.user.id,
+                name: tweet.user.name,
+                screen_name: tweet.user.screen_name,
+                profile_description: tweet.user.description,
+                profile_image: tweet.user.profile_image_url_https
+            ).tweets.new(
+                user_id: user.id,
+                post_id: tweet.id,
+                post_created_at: tweet.created_at,
+                text: tweet.attrs[:full_text],
+                favorite_count: tweet.favorite_count,
+                retweet_count: tweet.retweet_count,
+                )
+          end
           if tweet.media?
             tweet.media.each do |media|
               if media.type == "video"
@@ -58,12 +73,11 @@ class Tweet < ApplicationRecord
                   if variant.content_type == "video/mp4"
                     isBreak = true
                     _tweet.tweet_videos.new(tweet_video_url: variant.url)
-                    break
                   end
                   break if isBreak
                 end
               end
-              _tweet.tweet_images.new(tweetimage_url: media.media_url_https)
+              _tweet.tweet_images.new(tweet_image_url: media.media_url_https)
             end
           end
           _tweet.save!
@@ -96,17 +110,17 @@ class Tweet < ApplicationRecord
   end
 
   def self.post_users(user)
-    user.tweets.select(
-        :profile_description,
-        :postuser_screen_name,
-        :postuser_profile_image,
-        :postuser_id
-    ).group(
-        :profile_description,
-        :postuser_screen_name,
-        :postuser_profile_image,
-        :postuser_id
-    ).reorder(postuser_id: "DESC")
+    # user.tweets.select(
+    #     :profile_description,
+    #     :postuser_screen_name,
+    #     :postuser_profile_image,
+    #     :postuser_id
+    # ).group(
+    #     :profile_description,
+    #     :postuser_screen_name,
+    #     :postuser_profile_image,
+    #     :postuser_id
+    # ).reorder(postuser_id: "DESC")
   end
 
   def self.new_tweet?(user_id, tweet_id)

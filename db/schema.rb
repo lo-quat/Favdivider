@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_25_100037) do
+ActiveRecord::Schema.define(version: 2019_06_10_174717) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -18,6 +18,18 @@ ActiveRecord::Schema.define(version: 2019_05_25_100037) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_categories_on_user_id"
+  end
+
+  create_table "post_users", force: :cascade do |t|
+    t.string "uid"
+    t.string "name"
+    t.string "screen_name"
+    t.string "profile_description"
+    t.string "profile_image"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_post_users_on_user_id"
   end
 
   create_table "relationships", force: :cascade do |t|
@@ -30,7 +42,7 @@ ActiveRecord::Schema.define(version: 2019_05_25_100037) do
   end
 
   create_table "tweet_images", force: :cascade do |t|
-    t.string "tweetimage_url"
+    t.string "tweet_image_url"
     t.integer "tweet_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -51,15 +63,12 @@ ActiveRecord::Schema.define(version: 2019_05_25_100037) do
     t.string "text"
     t.integer "favorite_count"
     t.integer "retweet_count"
-    t.string "postuser_id"
-    t.string "postuser_name"
-    t.string "postuser_screen_name"
-    t.string "profile_description"
     t.integer "user_id"
+    t.integer "post_user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "status", default: 0, null: false
-    t.string "postuser_profile_image"
+    t.index ["post_user_id"], name: "index_tweets_on_post_user_id"
     t.index ["user_id"], name: "index_tweets_on_user_id"
   end
 
