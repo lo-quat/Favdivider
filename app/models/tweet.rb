@@ -109,20 +109,6 @@ class Tweet < ApplicationRecord
     tweets
   end
 
-  def self.post_users(user)
-    # user.tweets.select(
-    #     :profile_description,
-    #     :postuser_screen_name,
-    #     :postuser_profile_image,
-    #     :postuser_id
-    # ).group(
-    #     :profile_description,
-    #     :postuser_screen_name,
-    #     :postuser_profile_image,
-    #     :postuser_id
-    # ).reorder(postuser_id: "DESC")
-  end
-
   def self.new_tweet?(user_id, tweet_id)
     Tweet.find_by(user_id: user_id, post_id: tweet_id).nil?
   end
