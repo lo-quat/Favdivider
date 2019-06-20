@@ -91,6 +91,8 @@ class Tweet < ApplicationRecord
     tweets = Tweet.where(user_id: user_id)
     return tweets if tweets.blank?
 
+    tweets = tweets.where(post_user_id: queries[:post_user_id]) if queries[:post_user_id].present?
+
     if queries[:tweet_text].present?
       tweets = tweets.where("text LIKE ?", "%#{queries[:tweet_text]}%")
     end

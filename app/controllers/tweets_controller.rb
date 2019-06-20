@@ -6,7 +6,9 @@ class TweetsController < ApplicationController
         @tweets = Tweet.search(current_user.id, {tweet_text: params[:tweet_text],
                                                  like_num: params[:like_num],
                                                  clip: params[:clip],
-                                                 category_id: params[:category_id][0]})
+                                                 category_id: params[:category_id][0],
+                                                 post_user_id: params[:post_user_id]}
+        )
       elsif params[:sort]
         @tweets = current_user.tweets.reorder(favorite_count: "DESC")
       else
@@ -32,7 +34,7 @@ class TweetsController < ApplicationController
     tweet = Tweet.find_by(id: params[:id])
     tweet.toggle_clip!
     respond_to do |format|
-      format.json{render json: {status: tweet.status}}
+      format.json {render json: {status: tweet.status}}
     end
   end
 
