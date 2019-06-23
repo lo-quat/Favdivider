@@ -1,16 +1,18 @@
 <div class="col-md-4">
-  ツイート検索
-  <%= form_tag(tweets_path, method: :get) do %>
-    <%= text_field_tag :tweet_text, '', placeholder: "検索ワード" %>を含むツイート<br/>
-    <%= number_field_tag :like_num, '', placeholder: "いいね数" %>いいね以上<br/>
-    <%= collection_select :category_id,'',current_user.categories,:id,:name, prompt: "Select Category" %><br/>
-    <%= collection_select :post_user_id,'',current_user.post_users,:id,:screen_name, prompt: "Select User" %><br/>
-    <%= check_box_tag :clip %>
-    <%= label_tag "clipツイート" %>
-    <%= submit_tag 'Search', name: nil %>
-    <%= hidden_field_tag :search, true %>
+  <p>ツイート検索</p>
+    <%= form_tag(tweets_path, method: :get) do %>
+      <%= text_field_tag :tweet_text, '', placeholder: "検索ワード" %>を含むツイート
+      <%= number_field_tag :like_num, '', placeholder: "いいね数" %>いいね以上
+      <%= collection_select :category_id,'',current_user.categories,:id,:name, prompt: "Select Category" %>
+      <!--    <%#= collection_select :post_user_id,'',current_user.post_users,:id,:screen_name, prompt: "Select User" %><br/>-->
+      <%= check_box_tag :clip %>
+      <%= label_tag "clipツイート" %>
+      <%= submit_tag 'Search', name: nil %>
+      <%= hidden_field_tag :search, true %>
   <% end %>
+  <section class="search-list">
   <%= link_to "いいね多い順", tweets_path(params: {sort: 1}) %>
   <%= link_to "ユーザー一覧", post_users_path %>
   <%= link_to "新規カテゴリー作成",new_category_path %>
+  </section>
 </div>

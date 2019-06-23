@@ -89,9 +89,7 @@ class Tweet < ApplicationRecord
 
   def self.search(user_id, queries = {})
     tweets = Tweet.where(user_id: user_id)
-    return tweets if tweets.blank?
-
-    tweets = tweets.where(post_user_id: queries[:post_user_id]) if queries[:post_user_id].present?
+    #return tweets if tweets.blank?
 
     if queries[:tweet_text].present?
       tweets = tweets.where("text LIKE ?", "%#{queries[:tweet_text]}%")
@@ -107,6 +105,10 @@ class Tweet < ApplicationRecord
 
     if queries[:category_id].present?
       tweets = tweets.joins(:relationships).where(relationships: {category_id: queries[:category_id]})
+    end
+
+    if queries[:post_user_id].present?
+      tweets = tweets.where(post_user_id: queries[:post_user_id])
     end
     tweets
   end

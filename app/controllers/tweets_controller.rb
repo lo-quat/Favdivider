@@ -7,8 +7,7 @@ class TweetsController < ApplicationController
                                                  like_num: params[:like_num],
                                                  clip: params[:clip],
                                                  category_id: params[:category_id][0],
-                                                 post_user_id: params[:post_user_id]}
-        )
+                                                 post_user_id: params[:post_user_id]})
       elsif params[:sort]
         @tweets = current_user.tweets.reorder(favorite_count: "DESC")
       else
