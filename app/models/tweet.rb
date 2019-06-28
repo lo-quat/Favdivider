@@ -48,7 +48,7 @@ class Tweet < ApplicationRecord
                 post_created_at: tweet.created_at,
                 text: tweet.attrs[:full_text],
                 favorite_count: tweet.favorite_count,
-                retweet_count: tweet.retweet_count,
+                is_quote_status: tweet.quoted_status?
                 )
           else
             _tweet = user.post_users.new(
@@ -63,7 +63,7 @@ class Tweet < ApplicationRecord
                 post_created_at: tweet.created_at,
                 text: tweet.attrs[:full_text],
                 favorite_count: tweet.favorite_count,
-                retweet_count: tweet.retweet_count,
+                is_quote_status: tweet.quoted_status?
                 )
           end
           if tweet.media?

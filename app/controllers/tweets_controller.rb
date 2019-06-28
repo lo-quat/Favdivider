@@ -10,6 +10,8 @@ class TweetsController < ApplicationController
                                                  post_user_id: params[:post_user_id]})
       elsif params[:sort]
         @tweets = current_user.tweets.reorder(favorite_count: "DESC")
+      elsif params[:quote]
+        @tweets = current_user.tweets.where(is_quote_status: true)
       else
         @tweets = current_user.tweets
       end
