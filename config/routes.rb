@@ -8,5 +8,4 @@ Rails.application.routes.draw do
   get 'users/tweet_fetch', to: 'users#tweet_fetch'
   get 'post_user_tweets', to: 'tweets#post_user_tweets', as: 'post_user_tweets'
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
-    #get '/auth/:provider/callback', to: 'users#callback'
 end

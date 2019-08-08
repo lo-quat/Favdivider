@@ -130,13 +130,13 @@ label {
 
   li {
     list-style-type: none;
-    height: 50px;
+    height: 35px;
     border-bottom: solid 1px #ddd;
+    padding: 0 0 0 10px;
 
     &:hover {
       background: #ddd;
     }
-
 
     a {
       top: 0;
@@ -146,7 +146,7 @@ label {
       text-decoration: none;
       display: flex;
       align-items: center;
-      font-size: 16px;
+      font-size: 14px;
       color: inherit;
       }
   }
