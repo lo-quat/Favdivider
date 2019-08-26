@@ -28,5 +28,6 @@ module Sns::Tw
       end
     end
     puts 'db updated'
+    puts DateTime.now
   end
 end
