@@ -21,6 +21,7 @@ module Sns::Tw
         post_users.each do |post_user|
           _post_user = PostUser.find_by(uid: post_user.id)
           _post_user.name = post_user.name
+          _post_user.screen_name = post_user.screen_name
           _post_user.profile_description = post_user.description
           _post_user.profile_image = post_user.profile_image_uri_https
           _post_user.save!
