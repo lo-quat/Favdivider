@@ -23,3 +23,4 @@ doc/
 /config/master.key
 /.env
 /node_modules/
+/public/packs
