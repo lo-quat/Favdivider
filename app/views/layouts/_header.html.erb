@@ -1,16 +1,32 @@
-<header class="navbar navbar-fixed-top navbar-inverse">
-  <div class="container">
-    <%= link_to "Favdivider", root_path, id: "logo" %>
-    <nav>
-      <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Home", root_path %></li>
-        <% if user_signed_in? %>
-          <li><%= link_to "ツイート更新", users_tweet_fetch_path %></li>
-          <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
-        <% else %>
-          <li><%= link_to "ログイン", user_twitter_omniauth_authorize_path %></li>
-        <% end %>
+<header>
+
+  <!-- 追記 -->
+  <nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">Logo</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="sass.html">Sass</a></li>
+        <li><a href="badges.html">Components</a></li>
+        <li><a href="collapsible.html">JavaScript</a></li>
       </ul>
-    </nav>
-  </div>
+    </div>
+  </nav>
+
 </header>
+
+<!--<header class="navbar navbar-fixed-top navbar-inverse">-->
+<!--  <div class="container">-->
+    <%#= link_to "Favdivider", root_path, id: "logo" %>
+<!--    <nav>-->
+<!--      <ul class="nav navbar-nav navbar-right">-->
+<!--        <li><%#= link_to "Home", root_path %></li>-->
+        <%# if user_signed_in? %>
+<!--          <li><%#= link_to "ツイート更新", users_tweet_fetch_path %></li>-->
+<!--          <li><%#= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>-->
+        <%# else %>
+<!--          <li><%#= link_to "ログイン", user_twitter_omniauth_authorize_path %></li>-->
+        <%# end %>
+<!--      </ul>-->
+<!--    </nav>-->
+<!--  </div>-->
+<!--</header>-->
