@@ -6,7 +6,7 @@
   <%= csp_meta_tag %>
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/lity/1.6.6/lity.css' />
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/lity/1.6.6/lity.css'/>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <!-- Compiled and minified JavaScript -->
@@ -15,11 +15,14 @@
 </head>
 
 <body>
-<%= render 'layouts/header' %>
-<!--<div class="container">-->
-<!--  <div class="row">-->
+<% if user_signed_in? %>
+  <%= render 'layouts/header' %>
+  <%= render 'layouts/sidenav' %>
+  <main class="container">
     <%= yield %>
-<!--  </div>-->
-<!--</div>-->
+  </main>
+<% else %>
+  <%= render 'layouts/home' %>
+<% end %>
 </body>
 </html>

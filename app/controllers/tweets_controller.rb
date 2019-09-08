@@ -41,11 +41,6 @@ class TweetsController < ApplicationController
     end
   end
 
-  def post_user_tweets
-    @tweets = current_user.post_users.find(params[:post_user_id]).tweets
-    render action: :index
-  end
-
   private
 
   def tweet_params

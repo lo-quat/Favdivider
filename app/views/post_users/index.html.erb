@@ -1,14 +1,15 @@
-<%= render 'tweets/search_form' %>
-<div class="col-md-8">
-  ユーザー数 <%= @post_users.length %>
-  <% @post_users.each do |post_user| %>
-    <div class="well post_users">
-      <%= image_tag(post_user.profile_image, size: 50) %>
-      <p>@<%= post_user.screen_name %></p>
-      <span>
+<div class="row">
+  <div class="col s12">
+    ユーザー数 <%= @post_users.length %>
+    <% @post_users.each do |post_user| %>
+      <div class="tweets post_users">
+        <%= image_tag(post_user.profile_image, size: 50) %>
+        <p>@<%= post_user.screen_name %></p>
+        <span>
         <%= post_user.profile_description %>
-        <%= link_to '', post_user_tweets_path(post_user_id: post_user.id), 'aria-hidden': true %>
+          <%= link_to '', post_user_path(post_user.id), 'aria-hidden': true %>
       </span>
-    </div>
-  <% end %>
+      </div>
+    <% end %>
+  </div>
 </div>

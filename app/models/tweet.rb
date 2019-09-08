@@ -40,7 +40,7 @@ class Tweet < ApplicationRecord
     Tweet.transaction do
       tweets.each do |tweet|
         if Tweet.new_tweet?(user.id, tweet.id)
-          post_user = PostUser.exist_post_user(tweet.user.id)
+          post_user = PostUser.exist_post_user?(tweet.user.id)
           if post_user
             _tweet = post_user.tweets.new(
                 user_id: user.id,

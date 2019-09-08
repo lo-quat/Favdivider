@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    $('.modal').modal();
     const lightbox = lity();
     $('.content>img').click(function(e) {
         if (e.target.src) {
@@ -32,6 +33,8 @@ $(document).ready(function(){
         });
     }));
 });
-
-
+document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.autocomplete');
+    var instances = M.Autocomplete.init(elems, options);
+});
 
