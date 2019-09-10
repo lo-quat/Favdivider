@@ -22,6 +22,7 @@ class TweetsController < ApplicationController
 
   def edit
     @tweet = current_user.tweets.find(params[:id])
+    @categories = current_user.categories
     @relationship = @tweet.relationships.new
   end
 

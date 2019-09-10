@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    $('select').formSelect();
     $('.modal').modal();
     const lightbox = lity();
     $('.content>img').click(function(e) {
@@ -33,8 +34,9 @@ $(document).ready(function(){
         });
     }));
 });
+
 document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.autocomplete');
-    var instances = M.Autocomplete.init(elems, options);
+    var elems = document.querySelectorAll('.sidenav');
+    var instances = M.Sidenav.init(elems, {});
 });
 

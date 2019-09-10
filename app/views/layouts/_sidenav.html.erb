@@ -3,16 +3,17 @@
   <%= form_tag(tweets_path, method: :get) do %>
     <%= text_field_tag :tweet_text, '', placeholder: "検索ワード" %>
     <%= number_field_tag :like_num, '', placeholder: "○○いいね数以上" %>
-    <%= collection_select :category_id,'',current_user.categories,:id,:name, prompt: "カテゴリー選択" %>
+    <%= collection_select :category_id, '', current_user.categories, :id, :name, prompt: "カテゴリー選択" %>
     <label>
       <input type="checkbox" class="filled-in" name="clip" value="1"/>
       <span>Cliped</span>
     </label>
-    <%= submit_tag 'Search', name: nil,class: 'btn' %>
+    <%= submit_tag 'Search', name: nil, class: 'btn' %>
     <%= hidden_field_tag :search, true %>
   <% end %>
-  <li><%= link_to "カテゴリー編集",categories_path %></li>
-  <li><%= link_to "いいね多い順", tweets_path(params: {sort: 1}) %></li>
-  <li><%= link_to "ユーザー一覧", post_users_path %></li>
-  <li><%= link_to "引用ツイート", tweets_path(params: {quote: 1})%></li>
+  <li><%= link_to "カテゴリー編集", categories_path, class: 'waves-effect' %></li>
+  <li><%= link_to "いいね多い順", tweets_path(params: {sort: 1}, class: 'waves-effect') %></li>
+  <li><%= link_to "ユーザー一覧", post_users_path, class: 'waves-effect' %></li>
+  <li><%= link_to "引用ツイート", tweets_path(params: {quote: 1}, class: 'waves-effect') %></li>
+  <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'waves-effect' %></li>
 </ul>

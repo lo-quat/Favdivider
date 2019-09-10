@@ -1,4 +1,5 @@
 class CategoriesController < ApplicationController
+  before_action :set_category,only: [:update,:destroy]
 
   def index
     @categories = current_user.categories
@@ -18,7 +19,6 @@ class CategoriesController < ApplicationController
   end
 
   def update
-    set_category
     respond_to do |format|
       if @category.update(category_params)
         format.html { redirect_to request.referer, notice: 'Category was successfully updated.' }
@@ -31,14 +31,16 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
-    Category.find(params[:id]).destroy
+    @category.destroy
     redirect_to categories_url
   end
 
   private
+
     def set_category
       @category = Category.find(params[:id])
     end
+
     def category_params
       params.require(:category).permit(:name)
     end

@@ -1,0 +1,35 @@
+<!-- Modal Structure -->
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <h4>Add Category<%= @tweet.id %></h4>
+    <%= form_with model: @tweet do |f| %>
+      <%= f.collection_check_boxes(:category_ids, @categories, :id, :name) do |category| %>
+        <p>
+          <%= category.label do %>
+            <%= category.check_box %>
+            <span><%= category.text %></span>
+          <% end %>
+        </p>
+      <% end %>
+      <%= f.submit 'Add' ,class: 'btn'%>
+    <% end %>
+  </div>
+</div>
+
+<!-- Modal Structure -->
+<!--<div id="modal" class="modal">-->
+<!--  <div class="modal-content">-->
+<!--    <h4>Add Category<%#= @tweet.id %></h4>-->
+<%#= form_for(@tweet.relationships.build, url: tweet_path, method: :patch) do |f| %>
+<%# @categories.each do |category| %>
+<!--        <p>-->
+<!--          <label>-->
+<!--            <input type="checkbox"/>-->
+<!--            <span><%#= category.name %></span>-->
+<!--          </label>-->
+<!--        </p>-->
+<%# end %>
+<%# end %>
+<!--    <a href="#!" class="modal-close waves-effect waves-green btn">Add</a>-->
+<!--  </div>-->
+<!--</div>-->

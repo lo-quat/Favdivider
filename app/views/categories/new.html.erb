@@ -1,9 +1,0 @@
-<%= form_for(@category) do |f| %>
-  <%= f.label :"カテゴリー登録" %>
-    <%= f.text_field :name, placeholder: "Category Name" %>
-  <%= f.submit "Registrate",class: 'btn-small' %>
-<% end %>
-<section>登録済みカテゴリー</section>
-<% current_user.categories.each do |category| %>
-  <p><%= category.name %></p>
-<% end %>

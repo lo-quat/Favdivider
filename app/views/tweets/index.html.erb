@@ -3,7 +3,8 @@
     <% @tweets.each do |tweet| %>
       <div class="tweets">
         <%= image_tag(tweet.post_user.profile_image, size: 50) %>
-        <span class="user"><%= tweet.post_user.name %> <span class="screen-name">@<%= tweet.post_user.screen_name %></span></span>
+        <span class="user"><%= tweet.post_user.name %>
+          <span class="screen-name">@<%= tweet.post_user.screen_name %></span></span>
         <span class="content">
           <p><%= text_url_to_link(h(tweet.text)).html_safe %></p>
           <% if tweet.tweet_videos.present? %>
@@ -20,9 +21,10 @@
           <%= tweet.favorite_count %> likes
           <%= image_tag 'clip.png', class: 'toggle_status', size: 15,
                         data: {tweet_id: tweet.id, status: tweet.default?} %>
-          <%= link_to 'カテゴリー追加', edit_tweet_path(tweet) %>
+          <%= link_to 'カテゴリー追加', edit_tweet_path(tweet), remote: true %>
       </span>
       </div>
     <% end %>
+    <div id="category-modal"></div>
   </div>
 <% end %>
