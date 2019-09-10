@@ -23,14 +23,14 @@ class TweetsController < ApplicationController
   def edit
     @tweet = current_user.tweets.find(params[:id])
     @categories = current_user.categories
-    @relationship = @tweet.relationships.new
   end
 
   def update
-    relationship = Relationship.new(tweet_params)
+    relationship = Relationship.new(tweet_id: params[:tweet_id],category_id: params[:category_id])
 
     if relationship.save
-      redirect_to edit_tweet_url(params[:relationship][:tweet_id])
+      flash.now[:notice] = "Add Category"
+      render body: nil
     end
   end
 
@@ -42,9 +42,4 @@ class TweetsController < ApplicationController
     end
   end
 
-  private
-
-  def tweet_params
-    params.require(:relationship).permit(:category_id, :tweet_id)
-  end
 end
