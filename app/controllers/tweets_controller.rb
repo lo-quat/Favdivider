@@ -12,8 +12,6 @@ class TweetsController < ApplicationController
         @tweets = current_user.tweets.reorder(favorite_count: "DESC")
       elsif params[:quote]
         @tweets = current_user.tweets.where(is_quote_status: true)
-      elsif params[:image]
-        @tweets = current_user.tweets.joins(:tweet_images,:tweet_video).where()
       else
         @tweets = current_user.tweets
       end

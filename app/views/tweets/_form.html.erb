@@ -5,7 +5,7 @@
     <div class="collection">
       <% @categories.each do |category| %>
         <%= link_to category.name, tweet_path(params: {tweet_id: @tweet.id, category_id: category.id}),
-                    method: :patch, remote: true, class: 'collection-item modal-close'%>
+                    method: :patch, remote: true, class: 'collection-item modal-close' %>
       <% end %>
     </div>
   </div>

@@ -4,7 +4,7 @@ class Tweet < ApplicationRecord
   has_many :tweet_videos, dependent: :destroy
   has_many :relationships, dependent: :destroy
   accepts_nested_attributes_for :relationships, allow_destroy: true
-  has_many :categories, through: :relationships
+  has_many :categories, through: :relationships, dependent: :destroy
   belongs_to :user
   belongs_to :post_user
 
