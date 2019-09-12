@@ -10,9 +10,8 @@ class PostUsersController < ApplicationController
                       .order('tweets desc')
   end
 
-  # GET /post_users/1
-  # GET /post_users/1.json
   def show
+    @tweets = current_user.post_users.find(params[:id]).tweets
   end
 
   # PATCH/PUT /post_users/1

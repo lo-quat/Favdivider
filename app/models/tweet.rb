@@ -4,7 +4,7 @@ class Tweet < ApplicationRecord
   has_many :tweet_videos, dependent: :destroy
   has_many :relationships, dependent: :destroy
   accepts_nested_attributes_for :relationships, allow_destroy: true
-  has_many :categories, through: :relationships
+  has_many :categories, through: :relationships, dependent: :destroy
   belongs_to :user
   belongs_to :post_user
 
@@ -40,7 +40,7 @@ class Tweet < ApplicationRecord
     Tweet.transaction do
       tweets.each do |tweet|
         if Tweet.new_tweet?(user.id, tweet.id)
-          post_user = PostUser.exist_post_user(tweet.user.id)
+          post_user = PostUser.exist_post_user?(tweet.user.id)
           if post_user
             _tweet = post_user.tweets.new(
                 user_id: user.id,

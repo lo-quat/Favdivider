@@ -1,10 +1,32 @@
 <% if user_signed_in? %>
-  <%= render 'tweets/search_form' %>
-  <%= render 'tweets/feed' %>
-<% else %>
-  <div class="center jumbotron">
-    <h1>Welcome to Favdivider</h1>
-    <h2>This app is organize your favorites.</h2>
-    <%= link_to "Twitter Login", user_twitter_omniauth_authorize_path, class: "btn btn-lg btn-primary" %>
+  <div class="row">
+    <% @tweets.each do |tweet| %>
+      <div class="tweets">
+        <%= image_tag(tweet.post_user.profile_image, size: 50) %>
+        <span class="user"><%= tweet.post_user.name %>
+          <span class="screen-name">@<%= tweet.post_user.screen_name %></span></span>
+        <span class="content">
+          <p><%= text_url_to_link(h(tweet.text)).html_safe %></p>
+          <% if tweet.tweet_videos.present? %>
+          <%= link_to image_tag(tweet.tweet_images.first.tweet_image_url, size: 50),
+                      tweet.tweet_videos.first.tweet_video_url, data: {lity: "data-lity"} %>
+        <% elsif (tweet.tweet_images.present?) %>
+          <% tweet.tweet_images.each do |image| %>
+            <%= image_tag(image.tweet_image_url, size: 50) %>
+          <% end %>
+        <% end %>
+      </span>
+        <span class="status">
+        <p>Posted <%= time_ago_in_words(tweet.post_created_at) %> ago.</p>
+          <%= tweet.favorite_count %> likes
+          <%= image_tag 'clip.png', class: 'toggle_status', size: 15,
+                        data: {tweet_id: tweet.id, status: tweet.default?} %>
+          <%= link_to edit_tweet_path(tweet), remote: true, class: 'btn-small btn-floating' do %>
+            <i class="material-icons">add</i>
+          <% end %>
+      </span>
+      </div>
+    <% end %>
+    <div id="category-modal"></div>
   </div>
 <% end %>

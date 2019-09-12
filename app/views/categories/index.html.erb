@@ -1,0 +1,42 @@
+<h1>Category List</h1>
+<%= form_for(@category) do |f| %>
+  <%= f.label :"NewCategory" %>
+  <%= f.text_field :name, placeholder: "Category Name", style: "width: 70%" %>
+  <%= f.submit "Add", class: 'btn-small' %>
+<% end %>
+
+<table class="striped">
+  <thead>
+  <tr>
+    <th>カテゴリー名</th>
+    <th>ツイート数</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @categories.each do |category| %>
+    <tr>
+      <td><%= category.name %></td>
+      <td><%= category.tweets.count %></td>
+      <td>
+        <a class="btn btn-floating btn-small modal-trigger" href="#modal<%= category.id %>"><i class="material-icons">edit</i></a>
+      </td>
+      <!-- Modal Structure -->
+      <div id="modal<%= category.id %>" class="modal">
+        <div class="modal-content">
+          <h4>Edit CategoryName</h4>
+          <%= form_for @category, url: category_path(category.id), method: :patch do |f| %>
+            <%= f.text_field :name,placeholder: category.name %>
+            <%= f.submit "Edit",class: 'btn-small modal-close' %>
+          <% end %>
+        </div>
+      </div>
+      <td>
+        <%= link_to(category_path(category.id), class: "btn red btn-floating btn-small", method: :delete) do %>
+          <i class="material-icons">delete</i>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

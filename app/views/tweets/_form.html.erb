@@ -1,0 +1,12 @@
+<!-- Modal Structure -->
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <h4>Add Category<%= @tweet.id %></h4>
+    <div class="collection">
+      <% @categories.each do |category| %>
+        <%= link_to category.name, tweet_path(params: {tweet_id: @tweet.id, category_id: category.id}),
+                    method: :patch, remote: true, class: 'collection-item modal-close' %>
+      <% end %>
+    </div>
+  </div>
+</div>

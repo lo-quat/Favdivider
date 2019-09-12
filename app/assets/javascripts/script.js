@@ -1,4 +1,6 @@
 $(document).ready(function(){
+    $('select').formSelect();
+    $('.modal').modal();
     const lightbox = lity();
     $('.content>img').click(function(e) {
         if (e.target.src) {
@@ -33,5 +35,8 @@ $(document).ready(function(){
     }));
 });
 
-
+document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.sidenav');
+    var instances = M.Sidenav.init(elems, {});
+});
 

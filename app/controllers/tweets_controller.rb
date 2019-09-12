@@ -12,8 +12,6 @@ class TweetsController < ApplicationController
         @tweets = current_user.tweets.reorder(favorite_count: "DESC")
       elsif params[:quote]
         @tweets = current_user.tweets.where(is_quote_status: true)
-      elsif params[:image]
-        @tweets = current_user.tweets.joins(:tweet_images,:tweet_video).where()
       else
         @tweets = current_user.tweets
       end
@@ -22,14 +20,15 @@ class TweetsController < ApplicationController
 
   def edit
     @tweet = current_user.tweets.find(params[:id])
-    @relationship = @tweet.relationships.new
+    @categories = current_user.categories
   end
 
   def update
-    relationship = Relationship.new(tweet_params)
+    relationship = Relationship.new(tweet_id: params[:tweet_id],category_id: params[:category_id])
 
     if relationship.save
-      redirect_to edit_tweet_url(params[:relationship][:tweet_id])
+      flash.now[:notice] = "Add Category"
+      render body: nil
     end
   end
 
@@ -41,14 +40,4 @@ class TweetsController < ApplicationController
     end
   end
 
-  def post_user_tweets
-    @tweets = current_user.post_users.find(params[:post_user_id]).tweets
-    render action: :index
-  end
-
-  private
-
-  def tweet_params
-    params.require(:relationship).permit(:category_id, :tweet_id)
-  end
 end
