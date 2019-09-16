@@ -24,11 +24,14 @@ class TweetsController < ApplicationController
   end
 
   def update
-    relationship = Relationship.new(tweet_id: params[:tweet_id],category_id: params[:category_id])
-
-    if relationship.save
-      flash.now[:notice] = "Add Category"
-      render body: nil
+    @relationship = Relationship.new(tweet_id: params[:tweet_id],category_id: params[:category_id])
+    @category = Category.find(params[:category_id]).name
+    respond_to do |format|
+      if @relationship.save
+        format.js {@status = 'success'}
+      else
+        format.js {@status = 'fail'}
+      end
     end
   end
 

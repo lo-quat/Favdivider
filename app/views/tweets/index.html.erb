@@ -10,23 +10,30 @@
           <% if tweet.tweet_videos.present? %>
           <%= link_to image_tag(tweet.tweet_images.first.tweet_image_url, size: 50),
                       tweet.tweet_videos.first.tweet_video_url, data: {lity: "data-lity"} %>
-        <% elsif (tweet.tweet_images.present?) %>
+          <% elsif (tweet.tweet_images.present?) %>
           <% tweet.tweet_images.each do |image| %>
             <%= image_tag(image.tweet_image_url, size: 50) %>
           <% end %>
         <% end %>
-      </span>
+        </span>
         <span class="status">
-        <p>Posted <%= time_ago_in_words(tweet.post_created_at) %> ago.</p>
+        <span class="posted-at">Posted <%= time_ago_in_words(tweet.post_created_at) %> ago.</span>
           <%= tweet.favorite_count %> likes
           <%= image_tag 'clip.png', class: 'toggle_status', size: 15,
                         data: {tweet_id: tweet.id, status: tweet.default?} %>
           <%= link_to edit_tweet_path(tweet), remote: true, class: 'btn-small btn-floating' do %>
             <i class="material-icons">add</i>
           <% end %>
+          <span id="tweet-<%= tweet.id %>-category">
+            <% if tweet.categories %>
+              <% tweet.categories.each do |category| %>
+                #<%= category.name %>
+              <% end %>
+            <% end %>
+          </span>
       </span>
       </div>
     <% end %>
-    <div id="category-modal"></div>
+    <div id="category-modal" class="modal"></div>
   </div>
 <% end %>
