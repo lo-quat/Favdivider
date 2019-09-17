@@ -1,0 +1,6 @@
+<% if @status == 'success' %>
+$('#category-<%= @category.id %>-name').html('<%= @category.name %>')
+<%  elsif @status == 'fail' %>
+console.log('fail');
+<% end %>
+$("#edit-category").modal('close');

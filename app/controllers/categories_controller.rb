@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-  before_action :set_category,only: [:update,:destroy]
+  before_action :set_category,only: [:edit,:update,:destroy]
 
   def index
     @categories = current_user.categories
@@ -9,6 +9,9 @@ class CategoriesController < ApplicationController
     else
       @category = Category.new
     end
+  end
+
+  def edit
   end
 
 
@@ -23,9 +26,11 @@ class CategoriesController < ApplicationController
       if @category.update(category_params)
         format.html { redirect_to request.referer, notice: 'Category was successfully updated.' }
         format.json { render :show, status: :ok, location: @category }
+        format.js { @status = 'success'}
       else
         format.html { render :edit }
         format.json { render json: @category.errors, status: :unprocessable_entity }
+        format.js { @status = 'fail'}
       end
     end
   end

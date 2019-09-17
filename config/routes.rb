@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :users,only: [:edit,:update]
   resources :tweets,only: [:index,:update,:edit]
-  resources :categories,only: [:index,:create,:update,:destroy]
+  resources :categories,except: [:show]
   resources :post_users, only: [:index,:show]
   root 'tweets#index'
   patch 'tweets/:id/clip',to:'tweets#toggle_status', as: 'toggle_status'
