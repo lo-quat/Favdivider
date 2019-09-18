@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    $('.modal').modal();
     $('select').formSelect();
     const lightbox = lity();
     $('.content>img').click(function(e) {
