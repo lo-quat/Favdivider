@@ -13,6 +13,7 @@ class PostUsersController < ApplicationController
 
   def show
     @tweets = current_user.post_users.find(params[:id]).tweets
+    render template: 'tweets/index'
   end
 
   # PATCH/PUT /post_users/1
