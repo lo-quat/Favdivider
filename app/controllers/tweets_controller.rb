@@ -1,4 +1,5 @@
 class TweetsController < ApplicationController
+  before_action :login_required
 
   def index
     if user_signed_in?

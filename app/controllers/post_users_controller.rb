@@ -1,5 +1,6 @@
 class PostUsersController < ApplicationController
   before_action :set_post_user, only: [:show, :edit, :update, :destroy]
+  before_action :login_required
 
   # GET /post_users
   # GET /post_users.json

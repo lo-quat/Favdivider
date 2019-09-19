@@ -1,5 +1,6 @@
 class CategoriesController < ApplicationController
   before_action :set_category,only: [:edit,:update,:destroy]
+  before_action :login_required
 
   def index
     @categories = current_user.categories
