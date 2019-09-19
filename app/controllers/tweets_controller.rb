@@ -2,20 +2,18 @@ class TweetsController < ApplicationController
   before_action :login_required
 
   def index
-    if user_signed_in?
-      if params[:search].present?
-        @tweets = Tweet.search(current_user.id, {tweet_text: params[:tweet_text],
-                                                 like_num: params[:like_num],
-                                                 clip: params[:clip],
-                                                 category_id: params[:category_id][0],
-                                                 post_user_id: params[:post_user_id]})
-      elsif params[:sort]
-        @tweets = current_user.tweets.reorder(favorite_count: "DESC")
-      elsif params[:quote]
-        @tweets = current_user.tweets.where(is_quote_status: true)
-      else
-        @tweets = current_user.tweets
-      end
+    if params[:search].present?
+      @tweets = Tweet.search(current_user.id, {tweet_text: params[:tweet_text],
+                                               like_num: params[:like_num],
+                                               clip: params[:clip],
+                                               category_id: params[:category_id][0],
+                                               post_user_id: params[:post_user_id]})
+    elsif params[:sort]
+      @tweets = current_user.tweets.reorder(favorite_count: "DESC")
+    elsif params[:quote]
+      @tweets = current_user.tweets.where(is_quote_status: true)
+    else
+      @tweets = current_user.tweets
     end
   end
 
@@ -25,7 +23,7 @@ class TweetsController < ApplicationController
   end
 
   def update
-    @relationship = Relationship.new(tweet_id: params[:tweet_id],category_id: params[:category_id])
+    @relationship = Relationship.new(tweet_id: params[:tweet_id], category_id: params[:category_id])
     @category = Category.find(params[:category_id]).name
     respond_to do |format|
       if @relationship.save
