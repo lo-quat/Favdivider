@@ -3,13 +3,13 @@ class TweetsController < ApplicationController
 
   def index
     if params[:search].present?
-      @tweets = Tweet.search(current_user.id, {tweet_text: params[:tweet_text],
-                                               like_num: params[:like_num],
-                                               clip: params[:clip],
-                                               category_id: params[:category_id][0],
-                                               post_user_id: params[:post_user_id]})
+      @tweets = Tweet.search(current_user.id, tweet_text: params[:tweet_text],
+                                              like_num: params[:like_num],
+                                              clip: params[:clip],
+                                              category_id: params[:category_id][0],
+                                              post_user_id: params[:post_user_id])
     elsif params[:sort]
-      @tweets = current_user.tweets.reorder(favorite_count: "DESC")
+      @tweets = current_user.tweets.reorder(favorite_count: 'DESC')
     elsif params[:quote]
       @tweets = current_user.tweets.where(is_quote_status: true)
     else
