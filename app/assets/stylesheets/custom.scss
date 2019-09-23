@@ -1,3 +1,6 @@
+body {
+  font-size: 13px;
+}
 /* tweets */
 .tweets {
   > img {
@@ -16,6 +19,9 @@
   .content {
     display: block;
     margin-left: 60px;
+    p{
+      margin: 0;
+    }
 
     img {
       display: inline-block;
@@ -30,6 +36,9 @@
   .status {
     margin-left: 60px;
     display: block;
+    .posted-at {
+      color: #999999;
+    }
 
     img:hover {
       cursor: pointer;
@@ -67,8 +76,20 @@ header, main {
   padding-left: 300px;
 }
 
+//header {
+//  margin-bottom: 70px;
+//}
+
 @media only screen and (max-width : 992px) {
   header, main {
     padding-left: 0;
   }
+}
+
+.alert {
+  width: 100%;
+  height: 50px;
+  text-align: center;
+  background-color: #FFFFCC;
+  color: red;
 }

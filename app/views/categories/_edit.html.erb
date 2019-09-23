@@ -1,0 +1,7 @@
+<div class="modal-content">
+  <h4>Edit CategoryName</h4>
+  <%= form_with model: @category do |f| %>
+    <%= f.text_field :name, placeholder: @category.name %>
+    <%= f.submit "Edit", class: 'btn-small' %>
+  <% end %>
+</div>

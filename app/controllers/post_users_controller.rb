@@ -1,5 +1,6 @@
 class PostUsersController < ApplicationController
   before_action :set_post_user, only: [:show, :edit, :update, :destroy]
+  before_action :login_required
 
   # GET /post_users
   # GET /post_users.json
@@ -12,6 +13,7 @@ class PostUsersController < ApplicationController
 
   def show
     @tweets = current_user.post_users.find(params[:id]).tweets
+    render template: 'tweets/index'
   end
 
   # PATCH/PUT /post_users/1

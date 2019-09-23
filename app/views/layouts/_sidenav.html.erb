@@ -1,4 +1,5 @@
 <ul id="slide-out" class="sidenav sidenav-fixed">
+  <li><%= link_to "みんなのお気に入りを見る", everybodys_tweets_index_path %></li>
   <p>ツイート検索</p>
   <%= form_tag(tweets_path, method: :get) do %>
     <%= text_field_tag :tweet_text, '', placeholder: "検索ワード" %>

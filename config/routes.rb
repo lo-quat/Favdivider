@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
-  resources :users,only: [:edit,:update]
-  resources :tweets,only: [:index,:update,:edit]
-  resources :categories,only: [:index,:create,:update,:destroy]
-  resources :post_users, only: [:index,:show]
-  root 'tweets#index'
-  patch 'tweets/:id/clip',to:'tweets#toggle_status', as: 'toggle_status'
+  namespace :everybodys do
+    get 'tweets/index'
+  end
+  root 'home#top'
+  resources :users, only: %i[edit update]
+  resources :tweets, only: %i[index update edit]
+  resources :categories, except: [:show]
+  resources :post_users, only: %i[index show]
+  patch 'tweets/:id/clip', to: 'tweets#toggle_status', as: 'toggle_status'
   get 'users/tweet_fetch', to: 'users#tweet_fetch'
-  get 'post_user_tweets', to: 'tweets#post_user_tweets', as: 'post_user_tweets'
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 end

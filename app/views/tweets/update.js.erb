@@ -1,0 +1,7 @@
+<% if @status == 'success' %>
+$('#tweet-<%= @relationship.tweet_id %>-category').append('#<%= @category %> ')
+console.log('success');
+<%  elsif @status == 'fail' %>
+console.log('fail');
+<% end %>
+$("#category-modal").modal('close');
