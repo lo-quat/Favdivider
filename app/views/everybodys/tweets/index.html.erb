@@ -18,11 +18,6 @@
       <span class="status">
         <span class="posted-at">Posted <%= time_ago_in_words(tweet.post_created_at) %> ago.</span>
         <%= tweet.favorite_count %> likes
-        <%= image_tag 'clip.png', class: 'toggle_status', size: 15,
-                      data: {tweet_id: tweet.id, status: tweet.default?} %>
-        <%= link_to edit_tweet_path(tweet), remote: true, class: 'btn-small btn-floating' do %>
-            <i class="material-icons">add</i>
-          <% end %>
         <span id="tweet-<%= tweet.id %>-category">
             <% if tweet.categories %>
               <% tweet.categories.each do |category| %>
