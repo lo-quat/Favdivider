@@ -3,11 +3,19 @@ body {
 }
 /* tweets */
 .tweets {
+  //border: #EEEEEE solid 0.1px;
+  //border-bottom: none;
+  //padding: 5px;
   > img {
     border-radius: 50%;
     float: left;
   }
   .user {
+    display: inline-block;
+    max-width: 250px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
     font-weight: bold;
     .screen-name{
       font-weight: normal;
@@ -20,6 +28,7 @@ body {
     display: block;
     margin-left: 60px;
     p{
+      word-wrap: break-word;
       margin: 0;
     }
 
@@ -48,6 +57,7 @@ body {
 }
 
 .post_users {
+  min-height: 50px;
   p {
     font-weight: bold;
     margin-bottom: 0;
@@ -57,6 +67,7 @@ body {
   span {
     display: block;
     margin-left: 60px;
+    word-wrap: break-word;
   }
 
   :hover {

@@ -2,8 +2,7 @@
     <% @tweets.each do |tweet| %>
       <div class="tweets">
         <%= image_tag(tweet.post_user.profile_image, size: 50) %>
-        <span class="user"><%= tweet.post_user.name %>
-          <span class="screen-name">@<%= tweet.post_user.screen_name %></span></span>
+        <span class="user"><%= tweet.post_user.name %> <span class="screen-name">@<%= tweet.post_user.screen_name %></span></span>
         <span class="content">
           <p><%= text_url_to_link(h(tweet.text)).html_safe %></p>
           <% if tweet.tweet_videos.present? %>
@@ -21,7 +20,7 @@
           <%= image_tag 'clip.png', class: 'toggle_status', size: 15,
                         data: {tweet_id: tweet.id, status: tweet.default?} %>
           <%= link_to edit_tweet_path(tweet), remote: true, class: 'btn-small btn-floating' do %>
-            <i class="material-icons">add</i>
+            <i class="tiny material-icons">add</i>
           <% end %>
           <span id="tweet-<%= tweet.id %>-category">
             <% if tweet.categories %>
