@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-  before_action :set_category,only: [:edit,:update,:destroy]
+  before_action :set_category, only: [:edit,:update,:destroy]
   before_action :login_required
 
   def index
@@ -39,6 +39,12 @@ class CategoriesController < ApplicationController
   def destroy
     @category.destroy
     redirect_to categories_url
+  end
+
+  def category_publish
+    set_category
+    @category.toggle_status!
+    render body: nil
   end
 
   private

@@ -4,4 +4,12 @@ class Category < ApplicationRecord
   belongs_to :user
   validates :name, presence: true, uniqueness: true
   enum status: { unpublish: 0, publish: 1 }
+
+  def toggle_status!
+    if unpublish?
+      publish!
+    else
+      unpublish!
+    end
+  end
 end

@@ -21,6 +21,20 @@
         <td id="category-<%= category.id %>-name"><%= category.name %></td>
         <td><%= category.tweets.count %></td>
         <td>
+          <div class="switch">
+            <label>
+              <%= check_box_tag 'status', category.status, checked = publish?(category), {
+                  data: {
+                      url: category_publish_path(category),
+                      method: :patch,
+                      remote: true
+                  }
+              } %>
+              <span class="lever"></span>
+            </label>
+          </div>
+        </td>
+        <td>
           <%= link_to edit_category_path(category), remote: true, class: 'btn btn-floating btn-small' do %>
             <i class="material-icons">edit</i>
           <% end %>
