@@ -5,31 +5,48 @@
   <%= f.submit "Add", class: 'btn-small' %>
 <% end %>
 
-<table class="striped">
-  <thead>
-  <tr>
-    <th>カテゴリー名</th>
-    <th>ツイート数</th>
-  </tr>
-  </thead>
-
-  <tbody>
-  <% @categories.each do |category| %>
+<% if @categories %>
+  <table class="striped">
+    <thead>
     <tr>
-      <td id="category-<%= category.id %>-name"><%= category.name %></td>
-      <td><%= category.tweets.count %></td>
-      <td>
-        <%= link_to edit_category_path(category), remote: true, class: 'btn btn-floating btn-small' do %>
-          <i class="material-icons">edit</i>
-        <% end %>
-      </td>
-      <td>
-        <%= link_to(category_path(category.id), class: "btn red btn-floating btn-small", method: :delete) do %>
-          <i class="material-icons">delete</i>
-        <% end %>
-      </td>
+      <th>カテゴリー名</th>
+      <th>ツイート数</th>
+      <th>公開設定</th>
     </tr>
-  <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+    <% @categories.each do |category| %>
+      <tr>
+        <td id="category-<%= category.id %>-name"><%= category.name %></td>
+        <td><%= category.tweets.count %></td>
+        <td>
+          <div class="switch">
+            <label>
+              <%= check_box_tag 'status', category.status, checked = publish?(category), {
+                  data: {
+                      url: category_publish_path(category),
+                      method: :patch,
+                      remote: true
+                  }
+              } %>
+              <span class="lever"></span>
+            </label>
+          </div>
+        </td>
+        <td>
+          <%= link_to edit_category_path(category), remote: true, class: 'btn btn-floating btn-small' do %>
+            <i class="material-icons">edit</i>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to(category_path(category.id), class: "btn red btn-floating btn-small", method: :delete) do %>
+            <i class="material-icons">delete</i>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% end %>
 <div id="edit-category" class="modal"></div>

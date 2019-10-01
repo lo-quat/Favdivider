@@ -1,5 +1,5 @@
 class Tweet < ApplicationRecord
-  enum status: {default: 0, cliped: 1}
+  enum status: { default: 0, cliped: 1 }
   has_many :tweet_images, dependent: :destroy
   has_many :tweet_videos, dependent: :destroy
   has_many :relationships, dependent: :destroy
@@ -8,7 +8,7 @@ class Tweet < ApplicationRecord
   belongs_to :user
   belongs_to :post_user
 
-  validates :relationships, length: {maximum: 3}
+  validates :relationships, length: { maximum: 3 }
 
   default_scope -> {order(post_created_at: :DESC)}
 
@@ -30,7 +30,7 @@ class Tweet < ApplicationRecord
     # いいね全件取得
     def client.get_all_favorites(user)
       collect_with_max_id do |max_id|
-        options = {count: 200, tweet_mode: "extended"}
+        options = { count: 200, tweet_mode: "extended" }
         options[:max_id] = max_id unless max_id.nil?
         favorites(user, options)
       end
@@ -104,7 +104,7 @@ class Tweet < ApplicationRecord
     end
 
     if queries[:category_id].present?
-      tweets = tweets.joins(:relationships).where(relationships: {category_id: queries[:category_id]})
+      tweets = tweets.joins(:relationships).where(relationships: { category_id: queries[:category_id] })
     end
 
     if queries[:post_user_id].present?
