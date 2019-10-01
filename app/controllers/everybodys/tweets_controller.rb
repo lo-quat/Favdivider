@@ -1,6 +1,7 @@
 class Everybodys::TweetsController < Everybodys::Base
   def index
-    # カテゴリー付ツイートのみを取り出す
-    @tweets = Tweet.joins(:relationships).where('relationships.tweet_id is not null')
+    # カテゴリー付きで公開ツイートのみを抽出
+    # 公開/非公開設定はカテゴリーごとに設定してある
+    @tweets = Tweet.joins(:categories).where(categories: { status: :publish })
   end
 end
