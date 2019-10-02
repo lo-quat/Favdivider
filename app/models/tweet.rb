@@ -72,12 +72,14 @@ class Tweet < ApplicationRecord
                 media.video_info.variants.each do |variant|
                   if variant.content_type == "video/mp4"
                     isBreak = true
-                    _tweet.tweet_videos.new(tweet_video_url: variant.url)
+                    _tweet.tweet_videos.new(tweet_video_url: variant.url,
+                                            thumbnail: media.media_url_https)
                   end
                   break if isBreak
                 end
+              else
+                _tweet.tweet_images.new(tweet_image_url: media.media_url_https)
               end
-              _tweet.tweet_images.new(tweet_image_url: media.media_url_https)
             end
           end
           _tweet.save!
