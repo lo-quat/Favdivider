@@ -14,7 +14,9 @@
   <% end %>
   <li><%= link_to "カテゴリー編集", categories_path, class: 'waves-effect' %></li>
   <li><%= link_to "いいね多い順", tweets_path(params: {sort: 1}), class: 'waves-effect' %></li>
-  <li><%= link_to "ユーザー一覧", post_users_path, class: 'waves-effect' %></li>
+  <li><%= link_to "投稿ユーザー別", post_users_path, class: 'waves-effect' %></li>
   <li><%= link_to "引用", tweets_path(params: {quote: 1}), class: 'waves-effect' %></li>
+  <li><%= link_to "動画", tweets_path(params: {video: 1}), class: 'waves-effect' %></li>
+  <li><%= link_to "画像", tweets_path(params: {image: 1}), class: 'waves-effect' %></li>
   <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'waves-effect' %></li>
 </ul>

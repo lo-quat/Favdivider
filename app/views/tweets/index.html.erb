@@ -6,7 +6,7 @@
         <span class="content">
           <p><%= text_url_to_link(h(tweet.text)).html_safe %></p>
           <% if tweet.tweet_videos.present? %>
-          <%= link_to image_tag(tweet.tweet_images.first.tweet_image_url, size: 50),
+          <%= link_to image_tag(tweet.tweet_videos.first.thumbnail, size: 50),
                       tweet.tweet_videos.first.tweet_video_url, data: {lity: "data-lity"} %>
           <% elsif (tweet.tweet_images.present?) %>
           <% tweet.tweet_images.each do |image| %>
