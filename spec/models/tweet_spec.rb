@@ -10,6 +10,7 @@ RSpec.describe Tweet, type: :model do
 
     context "テキスト検索" do
       context "検索結果が存在する場合" do
+        let!(:post_user) { create(:post_user)}
         let!(:tweet1) {create(:tweet1)}
         let!(:tweet2) {create(:tweet2)}
         let!(:results){Tweet.search(@user.id, {tweet_text: 'abc'})}
@@ -23,6 +24,7 @@ RSpec.describe Tweet, type: :model do
       end
 
       context "検索結果が存在しない場合" do
+        let!(:post_user) { create(:post_user)}
         let!(:tweet1) {create(:tweet1)}
         let!(:tweet2) {create(:tweet2)}
         let!(:results){Tweet.search(@user.id, {tweet_text: 'rfb'})}
@@ -34,6 +36,7 @@ RSpec.describe Tweet, type: :model do
 
     context "ライク検索" do
       context "検索結果が存在する場合" do
+        let!(:post_user) { create(:post_user)}
         let!(:tweet1) {create(:tweet1)}
         let!(:tweet3) {create(:tweet3)}
         let!(:results){Tweet.search(@user.id, {like_num: 10})}
@@ -46,6 +49,7 @@ RSpec.describe Tweet, type: :model do
       end
 
       context "検索結果が存在しない場合" do
+        let!(:post_user) { create(:post_user)}
         let!(:tweet1) {create(:tweet1)}
         let!(:tweet3) {create(:tweet3)}
         let!(:results){Tweet.search(@user.id, {like_num: 20})}
@@ -57,6 +61,7 @@ RSpec.describe Tweet, type: :model do
 
     context "カテゴリー検索" do
       context "検索結果が存在する場合" do
+        let!(:post_user) { create(:post_user)}
         let!(:tweet1){create(:tweet1)}
         let!(:category){create(:category)}
         let!(:relationship){create(:relationship)}
@@ -69,6 +74,7 @@ RSpec.describe Tweet, type: :model do
 
     context "複合検索" do
       context "検索結果が存在する場合" do
+        let!(:post_user) { create(:post_user)}
         let!(:tweet1) {create(:tweet1)}
         let!(:tweet3) {create(:tweet3)}
         let!(:results){Tweet.search(@user.id, {tweet_text: 'abc',like_num: 10})}
@@ -81,6 +87,7 @@ RSpec.describe Tweet, type: :model do
       end
 
       context "検索結果が存在しない場合" do
+        let!(:post_user) { create(:post_user)}
         let!(:tweet1) {create(:tweet1)}
         let!(:tweet3) {create(:tweet3)}
         let!(:results){Tweet.search(@user.id,{tweet_text: 'abc',like_num: 100})}
@@ -91,6 +98,7 @@ RSpec.describe Tweet, type: :model do
     end
 
     context "検索条件の指定がない場合" do
+      let!(:post_user) { create(:post_user)}
       let!(:tweet1) {create(:tweet1)}
       let!(:tweet2) {create(:tweet2)}
       let!(:tweet3) {create(:tweet3)}
