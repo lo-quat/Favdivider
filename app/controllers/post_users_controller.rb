@@ -5,10 +5,9 @@ class PostUsersController < ApplicationController
   # GET /post_users
   # GET /post_users.json
   def index
-    @post_users = current_user.post_users.select('post_users.*', 'count(tweets.post_user_id) AS tweets')
-                      .left_joins(:tweets)
-                      .group('tweets.post_user_id')
-                      .order('tweets desc')
+    post_users = current_user.post_users
+    # ツイートが多い順に並び替え
+    @post_users = post_users.sort_by{ |post_user| -post_user.tweets.size }
   end
 
   def show
