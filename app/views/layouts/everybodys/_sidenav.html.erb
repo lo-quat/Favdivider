@@ -1,3 +1,9 @@
 <ul id="slide-out" class="sidenav sidenav-fixed">
-  <li><%= link_to "自分のお気に入りを見る", tweets_path %></li>
+  <li>
+    <%= link_to tweets_path do%>
+      自分のお気に入りを見る<i class="material-icons">person</i>
+    <% end %>
+  </li>
+  <li><div class="divider"></div></li>
+  <li><%= link_to "カテゴリー一覧", everybodys_categories_path %></li>
 </ul>

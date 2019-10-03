@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   namespace :everybodys do
-    get 'tweets/index'
+    resources :tweets, only: %i[index]
+    resources :categories, only: %i[index show]
   end
   root 'home#top'
   resources :users, only: %i[edit update]
