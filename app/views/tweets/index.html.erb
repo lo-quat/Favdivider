@@ -1,8 +1,10 @@
-  <div class="row">
+<div class="row">
+  <div id="tweets">
     <% @tweets.each do |tweet| %>
-      <div class="tweets">
+      <div class="tweet">
         <%= image_tag(tweet.post_user.profile_image, size: 50) %>
-        <span class="user"><%= tweet.post_user.name %> <span class="screen-name">@<%= tweet.post_user.screen_name %></span></span>
+        <span class="user"><%= tweet.post_user.name %>
+          <span class="screen-name">@<%= tweet.post_user.screen_name %></span></span>
         <span class="content">
           <p><%= text_url_to_link(h(tweet.text)).html_safe %></p>
           <% if tweet.tweet_videos.present? %>
@@ -29,8 +31,12 @@
               <% end %>
             <% end %>
           </span>
-      </span>
+        </span>
       </div>
     <% end %>
     <div id="category-modal" class="modal"></div>
+    <div style="visibility: hidden">
+      <%= paginate @tweets %>
+    </div>
   </div>
+</div>

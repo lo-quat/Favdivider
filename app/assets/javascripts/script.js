@@ -1,4 +1,10 @@
 $(document).ready(function(){
+    $('#tweets').infiniteScroll({
+        path: 'nav.pagination a[rel=next]',
+        append: '.tweet',
+        prefill: true,
+        history: false,
+    });
     $('.modal').modal();
     $('select').formSelect();
     const lightbox = lity();

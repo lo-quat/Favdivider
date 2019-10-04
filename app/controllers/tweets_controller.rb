@@ -7,17 +7,17 @@ class TweetsController < ApplicationController
                                               like_num: params[:like_num],
                                               clip: params[:clip],
                                               category_id: params[:category_id][0],
-                                              post_user_id: params[:post_user_id])
+                                              post_user_id: params[:post_user_id]).page(params[:page]).per(30)
     elsif params[:sort]
-      @tweets = current_user.tweets.reorder(favorite_count: 'DESC')
+      @tweets = current_user.tweets.reorder(favorite_count: 'DESC').page(params[:page]).per(30)
     elsif params[:quote]
-      @tweets = current_user.tweets.where(is_quote_status: true)
+      @tweets = current_user.tweets.where(is_quote_status: true).page(params[:page]).per(30)
     elsif params[:video]
-      @tweets = current_user.tweets.joins(:tweet_videos)
+      @tweets = current_user.tweets.joins(:tweet_videos).page(params[:page]).per(30)
     elsif params[:image]
-      @tweets = current_user.tweets.joins(:tweet_images).distinct
+      @tweets = current_user.tweets.joins(:tweet_images).distinct.page(params[:page]).per(30)
     else
-      @tweets = current_user.tweets
+      @tweets = current_user.tweets.page(params[:page]).per(30)
     end
   end
 
