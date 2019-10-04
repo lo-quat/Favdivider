@@ -42,7 +42,6 @@ gem 'jquery-rails'
 gem 'materialize-sass'
 gem 'material_icons'
 gem 'jquery-ui-rails'
-gem 'will_paginate'
 gem 'whenever'
 gem 'kaminari'
 group :development, :test do
