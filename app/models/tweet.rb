@@ -91,14 +91,14 @@ class Tweet < ApplicationRecord
 
   def self.search(user_id, queries = {})
     tweets = Tweet.where(user_id: user_id)
-    #return tweets if tweets.blank?
+    return tweets if tweets.blank?
 
     if queries[:tweet_text].present?
       tweets = tweets.where("text LIKE ?", "%#{queries[:tweet_text]}%")
     end
 
     if queries[:like_num].present?
-      tweets = tweets.where(favorite_count: queries[:like_num].to_i..Float::INFINITY)
+      tweets = tweets.where(favorite_count: queries[:like_num]..Float::INFINITY)
     end
 
     if queries[:clip].present?
@@ -109,9 +109,22 @@ class Tweet < ApplicationRecord
       tweets = tweets.joins(:relationships).where(relationships: { category_id: queries[:category_id] })
     end
 
-    if queries[:post_user_id].present?
-      tweets = tweets.where(post_user_id: queries[:post_user_id])
+    if queries[:sort].present?
+      tweets = tweets.reorder(favorite_count: 'DESC')
     end
+
+    if queries[:quote].present?
+      tweets = tweets.where(is_quote_status: true)
+    end
+
+    if queries[:video].present?
+      tweets = tweets.joins(:tweet_videos)
+    end
+
+    if queries[:image].present?
+      tweets = tweets.joins(:tweet_images).distinct
+    end
+
     tweets
   end
 

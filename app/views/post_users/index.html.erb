@@ -1,6 +1,6 @@
 <div class="row">
   <% @post_users.each do |post_user| %>
-    <div class="tweets post_users">
+    <div class="tweet post_users">
       <%= image_tag(post_user.profile_image, size: 50) %>
       <p>@<%= post_user.screen_name %></p>
       <span>
