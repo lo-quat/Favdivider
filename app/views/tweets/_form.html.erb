@@ -1,9 +1,21 @@
 <!-- Modal Structure -->
 <div class="modal-content">
   <h4>Add Category</h4>
+  <ul class="collapsible">
+    <li>
+      <div class="collapsible-header"><i class="material-icons">add</i>Create New Category</div>
+      <div class="collapsible-body">
+        <%= form_with model: @category do |f| %>
+          <%= f.text_field :name, placeholder: 'category name' %>
+          <%= f.submit "Create", class: "btn" %>
+          <%= hidden_field_tag :tweet_id, @tweet.id %>
+        <% end %>
+      </div>
+    </li>
+  </ul>
   <div class="collection">
     <% @categories.each do |category| %>
-      <%= link_to category.name, tweet_path(params: {tweet_id: @tweet.id, category_id: category.id}),
+      <%= link_to category.name, tweet_path(params: {category_id: category.id}),
                   method: :patch, remote: true, class: 'collection-item' %>
     <% end %>
   </div>

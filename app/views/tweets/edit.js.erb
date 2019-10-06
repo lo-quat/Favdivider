@@ -1,2 +1,6 @@
 $('#category-modal').html("<%= escape_javascript(render 'form') %>")
 $('#category-modal').modal('open');
+
+$(document).ready(function(){
+    $('.collapsible').collapsible();
+});
