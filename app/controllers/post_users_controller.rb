@@ -11,7 +11,7 @@ class PostUsersController < ApplicationController
   end
 
   def show
-    @tweets = current_user.post_users.find(params[:id]).tweets
+    @tweets = current_user.post_users.find(params[:id]).tweets.page(params[:page]).per(30)
     render template: 'tweets/index'
   end
 

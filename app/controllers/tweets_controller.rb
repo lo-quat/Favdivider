@@ -2,23 +2,8 @@ class TweetsController < ApplicationController
   before_action :login_required
 
   def index
-    if params[:search].present?
-      @tweets = Tweet.search(current_user.id, tweet_text: params[:tweet_text],
-                                              like_num: params[:like_num],
-                                              clip: params[:clip],
-                                              category_id: params[:category_id][0],
-                                              post_user_id: params[:post_user_id])
-    elsif params[:sort]
-      @tweets = current_user.tweets.reorder(favorite_count: 'DESC')
-    elsif params[:quote]
-      @tweets = current_user.tweets.where(is_quote_status: true)
-    elsif params[:video]
-      @tweets = current_user.tweets.joins(:tweet_videos)
-    elsif params[:image]
-      @tweets = current_user.tweets.joins(:tweet_images).distinct
-    else
-      @tweets = current_user.tweets
-    end
+    parameters = Parameter.new(params).define_params
+    @tweets = Tweet.search(current_user.id, parameters).page(params[:page]).per(30)
   end
 
   def edit
