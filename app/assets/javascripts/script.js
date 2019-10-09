@@ -4,6 +4,7 @@ $(document).ready(function(){
         append: '.tweet',
         prefill: true,
         history: false,
+        hideNav: '.pagination'
     });
     $('.modal').modal();
     $('select').formSelect();

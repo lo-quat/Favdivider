@@ -12,7 +12,8 @@
                       tweet.tweet_videos.first.tweet_video_url, data: {lity: "data-lity"} %>
           <% elsif (tweet.tweet_images.present?) %>
           <% tweet.tweet_images.each do |image| %>
-            <%= image_tag(image.tweet_image_url, size: 50) %>
+            <%= link_to image_tag(image.tweet_image_url, size: 50),
+                        image_tag(image.tweet_image_url), data: {lity: 'data-lity'} %>
           <% end %>
         <% end %>
         </span>
@@ -35,8 +36,6 @@
       </div>
     <% end %>
     <div id="category-modal" class="modal"></div>
-    <div style="visibility: hidden">
-      <%= paginate @tweets %>
-    </div>
   </div>
+  <%= paginate @tweets %>
 </div>
