@@ -10,6 +10,12 @@ class UsersController < ApplicationController
     @user.update_attributes(user_params)
   end
 
+  def destroy
+    current_user.destroy
+    flash[:success] = 'アカウントを削除しました'
+    redirect_to root_url
+  end
+
   def tweet_fetch
     Tweet.fetch(current_user)
     redirect_to root_url
