@@ -1,7 +1,7 @@
-<% if current_user.authenticated?  %>
-  <p>連携済み</p>
-  <%= link_to "TweetFetch",users_tweet_fetch_path %>
-<% else %>
-  <%= link_to "Twitter連携", '/auth/twitter' %>
-<% end %>
-
+<h3>Settings</h3>
+<p><i class="material-icons">delete</i>アカウント削除
+<li style="list-style: none">
+  <div class="divider"></div>
+</li>
+Favdividerに登録してあるユーザ情報、ツイート、カテゴリー等全て削除されます</p>
+<%= link_to 'アカウントを削除する', user_path, method: :delete, data: {confirm: "You sure?"}, class: 'btn red lighten-1' %>
