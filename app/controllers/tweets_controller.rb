@@ -25,11 +25,12 @@ class TweetsController < ApplicationController
   end
 
   def toggle_status
-    tweet = Tweet.find_by(id: params[:id])
-    tweet.toggle_clip!
-    respond_to do |format|
-      format.json {render json: {status: tweet.status}}
-    end
+    @tweet = Tweet.find(params[:id])
+    @tweet.toggle_clip!
   end
 
+  private
+    def set_tweet
+      @tweet - Tweet.find(params[:id])
+    end
 end
