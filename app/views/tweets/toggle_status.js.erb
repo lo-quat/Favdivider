@@ -1,0 +1,7 @@
+<% if @tweet.status == 'default' %>
+  console.log('default');
+  $('#tweet-<%= @tweet.id %>-clip').html("attach_file");
+<% else %>
+  console.log('cliped');
+  $('#tweet-<%= @tweet.id %>-clip').html("attachment");
+<% end %>
