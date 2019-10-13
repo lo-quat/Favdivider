@@ -1,5 +1,6 @@
 class TweetsController < ApplicationController
   before_action :login_required
+  before_action :set_tweet, only: [:edit, :toggle_status]
 
   def index
     parameters = Parameter.new(params).define_params
@@ -7,7 +8,6 @@ class TweetsController < ApplicationController
   end
 
   def edit
-    @tweet = current_user.tweets.find(params[:id])
     @categories = current_user.categories
     @category = Category.new
   end
@@ -25,12 +25,11 @@ class TweetsController < ApplicationController
   end
 
   def toggle_status
-    @tweet = Tweet.find(params[:id])
     @tweet.toggle_clip!
   end
 
   private
     def set_tweet
-      @tweet - Tweet.find(params[:id])
+      @tweet = Tweet.find(params[:id])
     end
 end
