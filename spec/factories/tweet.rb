@@ -16,5 +16,6 @@ FactoryBot.define do
     post_user_id {1}
     text {"abcklmn"}
     favorite_count {9}
+    status {1}
   end
 end
