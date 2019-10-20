@@ -1,4 +1,8 @@
 <div class="row">
+    <%= search_form_for @q, url: post_users_path do |f| %>
+      <%= f.text_field :search_words_cont, placeholder: 'ユーザー検索' %>
+      <%= f.submit 'Search', class: 'btn' %>
+    <% end %>
   <% @post_users.each do |post_user| %>
     <div class="tweet post_users">
       <%= image_tag(post_user.profile_image, size: 50) %>

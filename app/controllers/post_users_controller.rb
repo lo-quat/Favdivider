@@ -1,13 +1,19 @@
 class PostUsersController < ApplicationController
-  before_action :set_post_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_post_user, only: [:show, :update]
   before_action :login_required
 
   # GET /post_users
   # GET /post_users.json
   def index
-    post_users = current_user.post_users
-    # ツイートが多い順に並び替え
-    @post_users = post_users.sort_by{ |post_user| -post_user.tweets.size }
+    words = params[:q].delete(:search_words_cont) if params[:q].present?
+    if words.present?
+      params[:q][:groupings] = []
+      words.split(/[ 　]/).each_with_index do |word, i| #全角空白と半角空白で切って、単語ごとに処理
+        params[:q][:groupings][i] = { search_words_cont: word }
+      end
+    end
+    @q = current_user.post_users.ransack(params[:q])
+    @post_users = @q.result.sort_by{ |q| -q.tweets.size }# デフォルトでツイートの多い順に表示
   end
 
   def show
