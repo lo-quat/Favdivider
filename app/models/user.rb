@@ -2,6 +2,7 @@ class User < ApplicationRecord
   has_many :tweets, dependent: :destroy
   has_many :post_users, dependent: :destroy
   has_many :categories, dependent: :destroy
+  validates :email, :encrypted_password, :uid, :access_token, :access_token_secret, presence: true
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,

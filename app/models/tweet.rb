@@ -7,10 +7,10 @@ class Tweet < ApplicationRecord
   has_many :categories, through: :relationships, dependent: :destroy
   belongs_to :user
   belongs_to :post_user
+  validates :user_id, :post_user_id, :status, presence: true
+  validates :relationships, length: {maximum: 3}
 
-  validates :relationships, length: { maximum: 3 }
-
-  default_scope -> {order(post_created_at: :DESC)}
+  default_scope -> { order(post_created_at: :DESC) }
 
 
   def self.fetch(user)
@@ -30,7 +30,7 @@ class Tweet < ApplicationRecord
     # いいね全件取得
     def client.get_all_favorites(user)
       collect_with_max_id do |max_id|
-        options = { count: 200, tweet_mode: "extended" }
+        options = {count: 200, tweet_mode: "extended"}
         options[:max_id] = max_id unless max_id.nil?
         favorites(user, options)
       end
@@ -40,31 +40,31 @@ class Tweet < ApplicationRecord
     Tweet.transaction do
       tweets.each do |tweet|
         if Tweet.new_tweet?(user.id, tweet.id)
-          post_user = PostUser.exist_post_user?(tweet.user.id)
-          if post_user
+          post_user = user.post_users.find_by(uid: tweet.user.id).presence
+          if post_user#投稿ユーザーがDBにすでにある場合
             _tweet = post_user.tweets.new(
                 user_id: user.id,
                 post_id: tweet.id,
                 post_created_at: tweet.created_at,
                 text: tweet.attrs[:full_text],
                 favorite_count: tweet.favorite_count,
-                is_quote_status: tweet.quoted_status?
-                )
-          else
+                is_quote_status: tweet.quoted_status?,
+            ).tap(&:save)# 一度セーブしてidを付与しバリデーションを通るようにする
+          elsif post_user.nil?#新規の投稿ユーザーの場合
             _tweet = user.post_users.new(
                 uid: tweet.user.id,
                 name: tweet.user.name,
                 screen_name: tweet.user.screen_name,
                 profile_description: tweet.user.description,
                 profile_image: tweet.user.profile_image_url_https
-            ).tweets.new(
+            ).tap(&:save).tweets.new(
                 user_id: user.id,
                 post_id: tweet.id,
                 post_created_at: tweet.created_at,
                 text: tweet.attrs[:full_text],
                 favorite_count: tweet.favorite_count,
-                is_quote_status: tweet.quoted_status?
-                )
+                is_quote_status: tweet.quoted_status?,
+            ).tap(&:save)
           end
           if tweet.media?
             tweet.media.each do |media|
@@ -106,7 +106,7 @@ class Tweet < ApplicationRecord
     end
 
     if queries[:category_id].present?
-      tweets = tweets.joins(:relationships).where(relationships: { category_id: queries[:category_id] })
+      tweets = tweets.joins(:relationships).where(relationships: {category_id: queries[:category_id]})
     end
 
     if queries[:sort].present?
