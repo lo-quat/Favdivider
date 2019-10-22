@@ -1,15 +1,25 @@
 body {
   font-size: 13px;
 }
+
+@media screen and (min-width: 992px) {
+  main .row {
+    width: 70%;
+    margin: auto;
+  }
+}
+
 /* tweets */
 .tweet {
-  //border: #EEEEEE solid 0.1px;
-  //border-bottom: none;
-  //padding: 5px;
+  border: #eeeeee solid 0.1px;
+  border-bottom: none;
+  padding: 5px;
+
   > img {
     border-radius: 50%;
     float: left;
   }
+
   .user {
     display: inline-block;
     max-width: 250px;
@@ -17,17 +27,20 @@ body {
     white-space: nowrap;
     text-overflow: ellipsis;
     font-weight: bold;
-    .screen-name{
+
+    .screen-name {
       font-weight: normal;
       color: #999999;
     }
+
     margin-left: 10px;
   }
 
   .content {
     display: block;
     margin-left: 60px;
-    p{
+
+    p {
       word-wrap: break-word;
       margin: 0;
     }
@@ -45,6 +58,7 @@ body {
   .status {
     margin-left: 60px;
     display: block;
+
     .posted-at {
       color: #999999;
     }
@@ -58,6 +72,7 @@ body {
 
 .post_users {
   min-height: 50px;
+
   p {
     font-weight: bold;
     margin-bottom: 0;
@@ -69,10 +84,11 @@ body {
     margin-left: 60px;
     word-wrap: break-word;
   }
+}
 
-  :hover {
-    cursor: pointer;
-  }
+.post_users:hover {
+  background-color: #eeeeee;
+  cursor: pointer;
 }
 
 label {
@@ -91,7 +107,7 @@ header, main {
 //  margin-bottom: 70px;
 //}
 
-@media only screen and (max-width : 992px) {
+@media only screen and (max-width: 992px) {
   header, main {
     padding-left: 0;
   }
