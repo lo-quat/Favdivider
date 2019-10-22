@@ -5,14 +5,7 @@ class PostUsersController < ApplicationController
   # GET /post_users
   # GET /post_users.json
   def index
-    words = params[:q].delete(:search_words_cont) if params[:q].present?
-    if words.present?
-      params[:q][:groupings] = []
-      words.split(/[ 　]/).each_with_index do |word, i| #全角空白と半角空白で切って、単語ごとに処理
-        params[:q][:groupings][i] = { search_words_cont: word }
-      end
-    end
-    @q = current_user.post_users.ransack(params[:q])
+    @q = current_user.post_users.ransack(Parameter.new(params).post_user_params)
     @post_users = @q.result.sort_by{ |q| -q.tweets.size }# デフォルトでツイートの多い順に表示
   end
 
