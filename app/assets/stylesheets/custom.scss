@@ -57,7 +57,12 @@ body {
 
   .status {
     margin-left: 60px;
+    margin-bottom: 10px;
     display: block;
+
+    .edit-tweet {
+      float: right;
+    }
 
     .posted-at {
       color: #999999;

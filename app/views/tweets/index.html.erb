@@ -21,6 +21,7 @@
       <span class="status">
         <span class="posted-at">Posted <%= time_ago_in_words(tweet.post_created_at) %> ago.</span>
         <%= tweet.favorite_count %> likes
+        <div class="edit-tweet">
         <%= link_to toggle_status_path(tweet), remote: true, method: :patch, class: 'btn btn-small btn-floating grey' do %>
             <i class="material-icons" id="tweet-<%= tweet.id %>-clip">
               <% if tweet.status == 'default' %>
@@ -30,9 +31,10 @@
               <% end %>
             </i>
           <% end %>
-        <%= link_to edit_tweet_path(tweet), remote: true, class: 'btn-small btn-floating' do %>
+          <%= link_to edit_tweet_path(tweet), remote: true, class: 'btn-small btn-floating' do %>
             <i class="tiny material-icons">add</i>
           <% end %>
+        </div>
         <span id="tweet-<%= tweet.id %>-category">
             <% if tweet.categories %>
               <% tweet.categories.each do |category| %>
