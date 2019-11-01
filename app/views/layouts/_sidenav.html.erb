@@ -15,7 +15,6 @@
     </label>
     <%= collection_select :category, :id, current_user.categories, :id, :name, prompt: "カテゴリー選択" %>
     <%= submit_tag 'Search', name: nil, class: 'btn' %>
-    <%#= hidden_field_tag :search, true %>
   <% end %>
   <li><%= link_to "カテゴリー編集", categories_path, class: 'waves-effect' %></li>
   <li><%= link_to "いいね多い順", tweets_path(params: {sort: 1}), class: 'waves-effect' %></li>
