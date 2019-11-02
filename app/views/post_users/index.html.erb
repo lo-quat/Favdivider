@@ -3,12 +3,13 @@
   <%= f.submit 'Search', class: 'btn' %>
 <% end %>
 <% @post_users.each do |post_user| %>
-  <div class="tweet post_users">
+  <div class="tweet post-user">
     <%= image_tag(post_user.profile_image, size: 50) %>
-    <p>@<%= post_user.screen_name %></p>
-    <span>
-        <%= post_user.profile_description %>
-      <%= link_to '', post_user_path(post_user.id), 'aria-hidden': true %>
+    <span class="user"><%= post_user.name %>
+      <span class="screen-name">@<%= post_user.screen_name %></span></span>
+    <span class="content">
+        <p><%= post_user.profile_description %></p>
         </span>
+      <%= link_to '', post_user_path(post_user.id), 'aria-hidden': true %>
   </div>
 <% end %>
