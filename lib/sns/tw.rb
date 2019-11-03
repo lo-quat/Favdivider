@@ -14,7 +14,7 @@ module Sns::Tw
         config.access_token_secret = user.access_token_secret
       end
 
-      all_ids = User.first.post_users.pluck(:uid)
+      all_ids = user.post_users.pluck(:uid)
       all_ids.map!(&:to_i)
       all_ids.each_slice(API_LIMIT) do |ids|
         post_users = client.users(ids)
