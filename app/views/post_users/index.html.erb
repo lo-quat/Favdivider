@@ -2,6 +2,7 @@
   <%= f.text_field :search_words_cont, placeholder: 'ユーザー検索' %>
   <%= f.submit 'Search', class: 'btn' %>
 <% end %>
+<div id="tweets">
 <% @post_users.each do |post_user| %>
   <div class="tweet post-user">
     <%= image_tag(post_user.profile_image, size: 50) %>
@@ -13,3 +14,5 @@
       <%= link_to '', post_user_path(post_user.id), 'aria-hidden': true %>
   </div>
 <% end %>
+</div>
+<%= paginate @post_users %>

@@ -7,6 +7,7 @@ class PostUsersController < ApplicationController
   def index
     @q = current_user.post_users.ransack(Parameter.new(params).post_user_params)
     @post_users = @q.result.sort_by{ |q| -q.tweets.size }# デフォルトでツイートの多い順に表示
+    @post_users = Kaminari.paginate_array(@post_users).page(params[:page]).per(30)
   end
 
   def show
