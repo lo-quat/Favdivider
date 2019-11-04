@@ -1,5 +1,6 @@
 <% if @status == 'success' %>
-$('#tweet-<%= @relationship.tweet_id %>-category').append('#<%= @category %> ')
+$('#tweet-<%= @relationship.tweet_id %>-category').append('<%= link_to "##{@category.name}",
+  tweets_path(params: {category: {id: @category.id}}), class: 'inlink' %> ')
 console.log('success');
 <%  elsif @status == 'fail' %>
 console.log('fail');

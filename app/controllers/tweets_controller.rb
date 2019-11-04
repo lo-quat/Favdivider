@@ -14,7 +14,7 @@ class TweetsController < ApplicationController
 
   def update
     @relationship = Relationship.new(tweet_id: params[:id], category_id: params[:category_id])
-    @category = Category.find(params[:category_id]).name
+    @category = Category.find(params[:category_id])
     respond_to do |format|
       if @relationship.save
         format.js {@status = 'success'}

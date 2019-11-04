@@ -40,7 +40,7 @@
         <span id="tweet-<%= tweet.id %>-category">
             <% if tweet.categories %>
               <% tweet.categories.each do |category| %>
-                #<%= category.name %>
+                <%= link_to "##{category.name}", tweets_path(params: {category: {id: category.id}}), class: 'inlink' %>
               <% end %>
             <% end %>
           </span>
