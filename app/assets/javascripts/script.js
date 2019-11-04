@@ -53,3 +53,11 @@ document.addEventListener('turbolinks:load', function(){
     });
 });
 
+document.addEventListener('turbolinks:before-visit', function() {
+    elem = document.querySelector('#slide-out');
+    instance = M.Sidenav.getInstance(elem);
+    if (instance){
+        instance.destroy();
+    }
+});
+
