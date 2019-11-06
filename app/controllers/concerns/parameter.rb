@@ -9,6 +9,7 @@ class Parameter
     @quote = params[:quote].presence
     @image = params[:image].presence
     @video = params[:video].presence
+    @reply = params[:reply].presence
 
     # PostUser検索の時params[:q]を整理して複数単語検索に対応させる
     words = params[:q].delete(:search_words_cont) if params[:q].present?
@@ -31,6 +32,7 @@ class Parameter
         quote: @quote,
         image: @image,
         video: @video,
+        reply: @reply
     }.with_indifferent_access.freeze
   end
 

@@ -125,6 +125,10 @@ class Tweet < ApplicationRecord
       tweets = tweets.joins(:tweet_images).distinct
     end
 
+    if queries[:reply].present?
+      tweets = tweets.where("text LIKE ?", "@#{User.find(user_id).screen_name}%")
+    end
+
     tweets
   end
 
