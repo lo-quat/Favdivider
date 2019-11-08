@@ -18,7 +18,10 @@ class User < ApplicationRecord
           access_token: auth[:credentials][:token],
           access_token_secret: auth[:credentials][:secret],
           email:    User.dummy_email(auth),
-          password: Devise.friendly_token[0, 20]
+          password: Devise.friendly_token[0, 20],
+          name: auth[:info][:name],
+          screen_name: auth[:info][:nickname],
+          description: auth[:info][:description],
       )
     end
 
