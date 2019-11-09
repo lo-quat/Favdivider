@@ -1,4 +1,5 @@
 document.addEventListener('turbolinks:load', function(){
+    Turbolinks.clearCache()
     $('#tweets').infiniteScroll({
         path: 'nav.pagination a[rel=next]',
         append: '.tweet',
@@ -59,5 +60,9 @@ document.addEventListener('turbolinks:before-visit', function() {
     if (instance){
         instance.destroy();
     }
+});
+
+document.addEventListener('turbolinks:before-cache', function() {
+    location.reload();
 });
 
