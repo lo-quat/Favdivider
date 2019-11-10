@@ -28,6 +28,8 @@
   <li><%= link_to "画像", tweets_path(params: {image: 1}), class: 'waves-effect' %></li>
   <li><%= link_to "自分宛リプライ", tweets_path(params: {reply: 1}), class: 'waves-effect' %></li>
   <li><div class="divider"></div></li>
+  <li><%= link_to "更新", users_tweet_fetch_path, class: 'waves-effect' %></li>
+  <li><div class="divider"></div></li>
   <li><%= link_to "アカウント設定", edit_user_path(current_user) %></li>
   <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'waves-effect' %></li>
 </ul>
