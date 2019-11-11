@@ -28,10 +28,10 @@ document.addEventListener('turbolinks:load', function(){
             });
         }
     });
+    $('.tabs').tabs();
     $('.sidenav').sidenav();
     $('.modal').modal();
     $('select').formSelect();
-
     $('div.post_users').click(function () {
         location.href = $(this).find('a').attr('href');
     });
