@@ -120,10 +120,6 @@ header, main {
   padding-left: 300px;
 }
 
-//header {
-//  margin-bottom: 70px;
-//}
-
 @media only screen and (max-width: 992px) {
   header, main {
     padding-left: 0;
@@ -136,4 +132,8 @@ header, main {
   text-align: center;
   background-color: #FFFFCC;
   color: red;
+}
+
+.paginate {
+  visibility: hidden;
 }

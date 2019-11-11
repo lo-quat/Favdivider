@@ -7,8 +7,8 @@ class Everybodys::CategoriesController < Everybodys::Base
 
   def show
     # 任意のカテゴリーに紐づけられたツイート一覧を表示する
-    @tweets = @category.tweets
-    render template: 'everybodys/tweets/index'
+    @tweets = @category.tweets.page(params[:page]).per(30)
+    render template: 'tweets/index'
   end
 
   private
