@@ -1,3 +1,14 @@
+<% if controller.controller_path == 'tweets' %>
+  <ul class="tabs">
+    <li class="tab col"><%= link_to "一覧", tweets_path, remote: true, class: 'waves-effect' %></li>
+    <li class="tab col"><%= link_to "引用", tweets_path(params: {quote: 1}), remote: true, class: 'waves-effect' %></li>
+    <li class="tab col"><%= link_to "動画", tweets_path(params: {video: 1}), remote: true, class: 'waves-effect' %></li>
+    <li class="tab col"><%= link_to "画像", tweets_path(params: {image: 1}), remote: true, class: 'waves-effect' %></li>
+    <li class="tab col"><%= link_to "リプライ", tweets_path(params: {reply: 1}), remote: true, class: 'waves-effect' %></li>
+    <li class="tab col"><%= link_to "クリップ", tweets_path(params: {clip: 1}), remote: true, class: 'waves-effect' %></li>
+  </ul>
+<% end %>
+
 <div id="tweets">
   <% @tweets.each do |tweet| %>
     <div class="tweet">
@@ -48,6 +59,6 @@
       <%= link_to '', "https://twitter.com/#{tweet.post_user.screen_name}/status/#{tweet.post_id}", 'aria-hidden': true %>
     </div>
   <% end %>
-  <div id="category-modal" class="modal"></div>
+  <span class="paginate"><%= paginate @tweets %></span>
 </div>
-<%= paginate @tweets %>
+<div id="category-modal" class="modal"></div>
