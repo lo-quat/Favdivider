@@ -20,13 +20,9 @@
     <%= collection_select :category, :id, current_user.categories, :id, :name, prompt: "カテゴリー選択" %>
     <%= submit_tag 'Search', name: nil, class: 'btn' %>
   <% end %>
-  <li><%= link_to "カテゴリー編集", categories_path, class: 'waves-effect' %></li>
-  <li><%= link_to "いいね多い順", tweets_path(params: {sort: 1}), class: 'waves-effect' %></li>
+  <li><%= link_to "ツイート一覧", tweets_path, class: 'waves-effect' %></li>
   <li><%= link_to "投稿ユーザー別", post_users_path, class: 'waves-effect' %></li>
-  <li><%= link_to "引用", tweets_path(params: {quote: 1}), class: 'waves-effect' %></li>
-  <li><%= link_to "動画", tweets_path(params: {video: 1}), class: 'waves-effect' %></li>
-  <li><%= link_to "画像", tweets_path(params: {image: 1}), class: 'waves-effect' %></li>
-  <li><%= link_to "自分宛リプライ", tweets_path(params: {reply: 1}), class: 'waves-effect' %></li>
+  <li><%= link_to "カテゴリー編集", categories_path, class: 'waves-effect' %></li>
   <li><div class="divider"></div></li>
   <li><%= link_to "更新", users_tweet_fetch_path, class: 'waves-effect' %></li>
   <li><div class="divider"></div></li>
