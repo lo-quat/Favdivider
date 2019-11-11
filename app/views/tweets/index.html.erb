@@ -10,55 +10,6 @@
 <% end %>
 
 <div id="tweets">
-  <% @tweets.each do |tweet| %>
-    <div class="tweet">
-      <%= image_tag(tweet.post_user.profile_image, size: 50) %>
-      <span class="user"><%= tweet.post_user.name %>
-        <span class="screen-name">@<%= tweet.post_user.screen_name %></span></span>
-      <span class="content">
-          <p><%= text_url_to_link(h(tweet.text)).html_safe %></p>
-        <% if tweet.tweet_videos.present? %>
-          <%= link_to image_tag(tweet.tweet_videos.first.thumbnail, size: 50),
-                      tweet.tweet_videos.first.tweet_video_url, class: 'popup-movie inlink' %>
-        <% elsif (tweet.tweet_images.present?) %>
-          <div class="popup-image">
-          <% tweet.tweet_images.each do |image| %>
-            <%= link_to image_tag(image.tweet_image_url, size: 50),
-                        image.tweet_image_url, class: 'inlink' %>
-          <% end %>
-          </div>
-        <% end %>
-        </span>
-      <span class="status">
-        <span class="posted-at">Posted <%= time_ago_in_words(tweet.post_created_at) %> ago.</span>
-        <%= tweet.favorite_count %> likes
-        <% unless controller.controller_path == 'everybodys/tweets' %>
-        <div class="edit-tweet">
-        <%= link_to toggle_status_path(tweet), remote: true, method: :patch, class: 'btn btn-small btn-floating grey inlink' do %>
-            <i class="material-icons" id="tweet-<%= tweet.id %>-clip">
-              <% if tweet.status == 'default' %>
-                attach_file
-              <% else %>
-                attachment
-              <% end %>
-            </i>
-          <% end %>
-          <%= link_to edit_tweet_path(tweet), remote: true, class: 'btn-small btn-floating inlink' do %>
-            <i class="tiny material-icons">add</i>
-          <% end %>
-        </div>
-          <% end %>
-        <span id="tweet-<%= tweet.id %>-category">
-            <% if tweet.categories %>
-              <% tweet.categories.each do |category| %>
-                <%= link_to "##{category.name}", tweets_path(params: {category: {id: category.id}}), class: 'inlink' %>
-              <% end %>
-            <% end %>
-          </span>
-        </span>
-      <%= link_to '', "https://twitter.com/#{tweet.post_user.screen_name}/status/#{tweet.post_id}", 'aria-hidden': true %>
-    </div>
-  <% end %>
-  <span class="paginate"><%= paginate @tweets %></span>
+  <%= render 'tweets/index' %>
 </div>
 <div id="category-modal" class="modal"></div>
