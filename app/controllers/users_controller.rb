@@ -1,13 +1,25 @@
 class UsersController < ApplicationController
   before_action :login_required
+  before_action :set_user, only: %i[edit show update]
 
   def edit
     @user = current_user
   end
 
-  def update
+  def show
     @user = current_user
-    @user.update_attributes(user_params)
+  end
+
+  def update
+    respond_to do |format|
+      if @user.update(user_params)
+        format.html { redirect_to request.referer, notice: 'User was successfully updated.' }
+        format.json { render :show, status: :ok, location: @user }
+      else
+        format.html { render :edit }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def destroy
@@ -34,4 +46,12 @@ class UsersController < ApplicationController
       redirect_to new_user_registration_url
     end
   end
+
+  private
+    def set_user
+      @user = User.find(params[:id])
+    end
+    def user_params
+      params.require(:user).permit(:name,:description)
+    end
 end
