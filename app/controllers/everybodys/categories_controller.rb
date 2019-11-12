@@ -8,13 +8,10 @@ class Everybodys::CategoriesController < Everybodys::Base
   def show
     # 任意のカテゴリーに紐づけられたツイート一覧を表示する
     # 別のユーザが同じ名前のカテゴリー名を作成している場合、同じ名前でツイートをまとめる
-    same_name_category = Category.where(name: @category.name, status: :publish)
-    if same_name_category.count > 1
-      tweets = same_name_category.inject do |category, n|
-        category.tweets.or(n.tweets)
-      end
-    elsif
-      tweets = same_name_category.first.tweets
+    if params[:user].present?
+      tweets = User.find(params[:user]).categories.find(params[:id]).tweets
+    else
+      tweets = Category.merge_same_category_tweet(@category.name)
     end
 
     @tweets = tweets.page(params[:page]).per(30)
