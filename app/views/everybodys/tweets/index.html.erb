@@ -8,12 +8,12 @@
           <p><%= text_url_to_link(h(tweet.text)).html_safe %></p>
         <% if tweet.tweet_videos.present? %>
           <%= link_to image_tag(tweet.tweet_videos.first.thumbnail, size: 50),
-                      tweet.tweet_videos.first.tweet_video_url, class: 'popup-movie' %>
+                      tweet.tweet_videos.first.tweet_video_url, class: 'popup-movie　inlink' %>
         <% elsif (tweet.tweet_images.present?) %>
           <div class="popup-image">
           <% tweet.tweet_images.each do |image| %>
             <%= link_to image_tag(image.tweet_image_url, size: 50),
-                        image.tweet_image_url %>
+                        image.tweet_image_url, class: 'inlink' %>
           <% end %>
           </div>
         <% end %>
@@ -29,6 +29,7 @@
             <% end %>
           </span>
         </span>
+      <%= link_to '', "https://twitter.com/#{tweet.post_user.screen_name}/status/#{tweet.post_id}", 'aria-hidden': true %>
     </div>
   <% end %>
   <div id="category-modal" class="modal"></div>

@@ -26,6 +26,6 @@
   <li><div class="divider"></div></li>
   <li><%= link_to "更新", users_tweet_fetch_path, class: 'waves-effect' %></li>
   <li><div class="divider"></div></li>
-  <li><%= link_to "アカウント設定", edit_user_path(current_user) %></li>
+  <li><%= link_to "アカウント", user_path(current_user) %></li>
   <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'waves-effect' %></li>
 </ul>
