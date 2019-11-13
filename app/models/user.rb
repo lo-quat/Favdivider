@@ -23,6 +23,7 @@ class User < ApplicationRecord
           name: auth[:info][:name],
           screen_name: auth[:info][:nickname],
           description: auth[:info][:description],
+          profile_image: auth[:info][:image]
       )
     end
 

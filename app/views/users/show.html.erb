@@ -1,6 +1,9 @@
-<h3>Account</h3>
-<div class="profile">
-  <p>name: <%= @user.name %></p>
-  <p>description: <%= @user.description %></p>
-  <p><%= link_to 'Edit', edit_user_path(@user), class: 'btn' %></p>
+<div class="container">
+  <h4>Account</h4>
+  <div class="profile">
+    <p><%= image_tag @user.profile_image, size: 100 %></p>
+    <p>name: <%= @user.name %></p>
+    <p>description: <%= @user.description %></p>
+    <p><%= link_to 'Edit', edit_user_path(@user), class: 'btn' %></p>
+  </div>
 </div>
