@@ -7,7 +7,7 @@ class Everybodys::UsersController < Everybodys::Base
 
   def show
     @categories = @user.categories.where(status: :publish)
-    render template: 'everybodys/categories/index'
+    render template: 'everybodys/categories/index', user: @user
   end
 
   private
