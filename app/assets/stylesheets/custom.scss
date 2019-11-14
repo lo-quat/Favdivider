@@ -137,3 +137,14 @@ header, main {
 .paginate {
   visibility: hidden;
 }
+
+#error_explanation {
+  width: 450px;
+  padding: 7px 7px 0;
+  margin-bottom: 20px;
+  ul li {
+    font-size: 12px;
+    color: red;
+    list-style: square;
+  }
+}

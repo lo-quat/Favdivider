@@ -1,8 +1,18 @@
-<div class="row">
-  <div class="collection with-header">
-    <div class="collection-header"><h4>Categories</h4></div>
-    <% @categories.each do |category| %>
-      <%= link_to category.name, everybodys_category_path(category),class: 'collection-item' %>
-    <% end %>
+<div class="collection with-header">
+  <div class="collection-header">
+    <h4>
+      <% if controller.controller_name == 'users' %>
+        <%= @user.name %>のカテゴリー
+      <% else %>
+        みんなのカテゴリー
+      <% end %>
+    </h4>
   </div>
+  <% @categories.each do |category| %>
+    <% if controller.controller_name == 'categories' %>
+      <%= link_to category.name, everybodys_category_path(category), class: 'collection-item' %>
+    <% else %>
+      <%= link_to category.name, everybodys_category_path(category, user: @user.id), class: 'collection-item' %>
+    <% end %>
+  <% end %>
 </div>

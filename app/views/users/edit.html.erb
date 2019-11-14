@@ -1,7 +1,29 @@
-<h3>Settings</h3>
-<p><i class="material-icons">delete</i>アカウント削除
-<li style="list-style: none">
-  <div class="divider"></div>
-</li>
-Favdividerに登録してあるユーザ情報、ツイート、カテゴリー等全て削除されます</p>
-<%= link_to 'アカウントを削除する', user_path, method: :delete, data: {confirm: "You sure?"}, class: 'btn red lighten-1' %>
+<div class="container">
+  <h3>Settings</h3>
+  <%= form_with model: @user, local: true do |f| %>
+    <% if @user.errors.any? %>
+      <div id="error_explanation">
+        <ul>
+          <% @user.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+
+    <%= f.submit class: 'btn' %>
+  <% end %>
+
+
+  <p><i class="material-icons">delete</i>アカウント削除
+  <li style="list-style: none">
+    <div class="divider"></div>
+  </li>
+  Favdividerに登録してあるユーザ情報、ツイート、カテゴリー等全て削除されます</p>
+  <%= link_to 'アカウントを削除する', user_path, method: :delete, data: {confirm: "You sure?"}, class: 'btn red lighten-1' %>
+</div>

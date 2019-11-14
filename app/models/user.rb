@@ -3,6 +3,7 @@ class User < ApplicationRecord
   has_many :post_users, dependent: :destroy
   has_many :categories, dependent: :destroy
   validates :email, :encrypted_password, :uid, :access_token, :access_token_secret, presence: true
+  validates :name, presence: true
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -22,6 +23,7 @@ class User < ApplicationRecord
           name: auth[:info][:name],
           screen_name: auth[:info][:nickname],
           description: auth[:info][:description],
+          profile_image: auth[:info][:image]
       )
     end
 

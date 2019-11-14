@@ -2,9 +2,10 @@ Rails.application.routes.draw do
   namespace :everybodys do
     resources :tweets, only: %i[index]
     resources :categories, only: %i[index show]
+    resources :users, only: %i[index show]
   end
   root 'home#top'
-  resources :users, only: %i[edit update destroy]
+  resources :users, only: %i[edit show update destroy]
   resources :tweets, only: %i[index update edit]
   resources :categories, except: [:show]
   resources :post_users, only: %i[index show]

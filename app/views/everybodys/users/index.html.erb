@@ -1,0 +1,11 @@
+<h4>Favdivider登録ユーザー</h4>
+<div id="tweets">
+  <% @users.each do |user| %>
+    <div class="tweet post-user">
+      <%= image_tag(user.profile_image, size: 50) %>
+      <span class="user"><%= user.name %></span>
+      <span class="content"><%= user.description %></span>
+      <%= link_to '', everybodys_user_path(user), 'aria-hidden': true %>
+    </div>
+  <% end %>
+</div>
