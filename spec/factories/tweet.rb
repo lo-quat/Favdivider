@@ -4,6 +4,7 @@ FactoryBot.define do
     post_user_id {1}
     text {"abcdefg"}
     favorite_count {10}
+    is_quote_status {true}
   end
   factory :tweet2, class: Tweet do
     user_id {1}

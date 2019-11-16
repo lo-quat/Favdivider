@@ -1,12 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  it "is valid with uid, access_token, access_token_secret, email, and password" do
+  it "is valid with uid, access_token, access_token_secret, email, password and name" do
     user = User.new(uid: Faker::Number.unique.number(digits: 16),
                     access_token: Faker::Lorem.characters(),
                     access_token_secret: Faker::Lorem.characters(),
                     email: Faker::Internet.email,
-                    password: Faker::Internet.password)
+                    password: Faker::Internet.password,
+                    name: Faker::Name.name)
     user.valid?
     expect(user).to be_valid
   end
@@ -32,6 +33,11 @@ RSpec.describe User, type: :model do
   end
   it "is invalid without password" do
     user = User.new(password: nil)
+    user.valid?
+    expect(user.errors[:password]).to include("can't be blank")
+  end
+  it "is invalid without name" do
+    user = User.new(name: nil)
     user.valid?
     expect(user.errors[:password]).to include("can't be blank")
   end

@@ -5,6 +5,7 @@ FactoryBot.define do
     access_token_secret {Faker::Lorem.characters(number: 16)}
     email {"test1@gmail.com"}
     password {"foobar1"}
+    name {Faker::Name.name}
   end
 
   factory :another_user, class: User do
@@ -13,5 +14,6 @@ FactoryBot.define do
     access_token_secret {Faker::Lorem.characters(number: 16)}
     email {"test2@gmail.com"}
     password {"foobar1"}
+    name {Faker::Name.name}
   end
 end
