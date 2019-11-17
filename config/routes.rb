@@ -13,4 +13,5 @@ Rails.application.routes.draw do
   get 'users/tweet_fetch', to: 'users#tweet_fetch'
   patch 'categories/category_publish/:id', to: 'categories#category_publish', as: 'category_publish'
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+  get 'tweets/hashtag', to: 'tweets#hashtag'
 end

@@ -143,4 +143,11 @@ class Tweet < ApplicationRecord
       default!
     end
   end
+
+  def self.hashtag_index(user)
+    hashtags = user.tweets.where("text LIKE ?","%#%").map do |tweet|
+      tweet.text.scan(/#\w+/)
+    end
+    hashtags.flatten.group_by(&:itself).map{ |key, value| [key, value.count] }.to_h
+  end
 end

@@ -1,0 +1,8 @@
+<div class="collection with-header">
+  <div class="collection-header">
+    <h4>ハッシュタグ一覧</h4>
+  </div>
+  <% @hashtags.each do |key, value| %>
+      <%= link_to "#{key}(#{value})", '#', class: 'collection-item' %>
+  <% end %>
+</div>

@@ -28,6 +28,10 @@ class TweetsController < ApplicationController
     @tweet.toggle_clip!
   end
 
+  def hashtag
+    @hashtags = Tweet.hashtag_index(current_user)
+  end
+
   private
     def set_tweet
       @tweet = Tweet.find(params[:id])
