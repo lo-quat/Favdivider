@@ -129,6 +129,10 @@ class Tweet < ApplicationRecord
       tweets = tweets.where("text LIKE ?", "@#{User.find(user_id).screen_name}%")
     end
 
+    if queries[:hash_tag].present?
+      tweets = tweets.where("text LIKE ?", "%#{queries[:hash_tag]}\s%")
+    end
+
     tweets
   end
 
@@ -148,6 +152,6 @@ class Tweet < ApplicationRecord
     hashtags = user.tweets.where("text LIKE ?","%#%").map do |tweet|
       tweet.text.scan(/#\w+/)
     end
-    hashtags.flatten.group_by(&:itself).map{ |key, value| [key, value.count] }.to_h
+    hashtags.flatten.group_by{|item| item.downcase}.map{ |key, value| [key, value.count] }.to_h
   end
 end
