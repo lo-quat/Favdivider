@@ -19,5 +19,6 @@ module Favdivider
     config.autoload_paths += %W(#{config.root}/lib)
 
     config.enable_dependency_loading = true
+    config.time_zone = 'Tokyo'
   end
 end

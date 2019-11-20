@@ -19,7 +19,7 @@
         <% end %>
         </span>
       <span class="status">
-        <span class="posted-at">Posted <%= time_ago_in_words(tweet.post_created_at) %> ago.</span>
+        <span class="posted-at"><%= tweet.post_created_at.strftime("%Y-%m-%d") %></span>
         <%= tweet.favorite_count %> likes
         <span id="tweet-<%= tweet.id %>-category">
             <% if tweet.categories %>
