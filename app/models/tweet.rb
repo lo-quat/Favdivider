@@ -130,7 +130,7 @@ class Tweet < ApplicationRecord
     end
 
     if queries[:hash_tag].present?
-      tweets = tweets.where("text LIKE ?", "%#{queries[:hash_tag]}\s%")
+      tweets = tweets.where("text LIKE ?", "%#{queries[:hash_tag]}%")
     end
 
     tweets
@@ -150,8 +150,8 @@ class Tweet < ApplicationRecord
 
   def self.hashtag_index(user)
     hashtags = user.tweets.where("text LIKE ?","%#%").map do |tweet|
-      tweet.text.scan(/#\w+/)
+      tweet.text.scan(/#\w+[[:blank:]]|#(?:\p{Hiragana}|\p{Katakana}|[ー－]|[一-龠々])+[[:blank:]]/)
     end
-    hashtags.flatten.group_by{|item| item.downcase}.map{ |key, value| [key, value.count] }.to_h
+    hashtags.flatten.group_by{|item| item.downcase}.map{ |key, value| [key, value.count] }.to_h.sort_by{ |key, value| value}.to_h
   end
 end
