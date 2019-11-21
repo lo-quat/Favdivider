@@ -7,11 +7,11 @@ class Category < ApplicationRecord
   enum status: {unpublish: 0, publish: 1}
 
   def toggle_status!
-    if unpublish?
-      publish!
-    else
-      unpublish!
-    end
+    unpublish? ? publish! : unpublish!
+  end
+
+  def publish?
+    status == 'publish' ? true : false
   end
 
   def self.merge_same_category_tweet(category_name)

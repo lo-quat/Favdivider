@@ -23,7 +23,7 @@
         <td>
           <div class="switch">
             <label>
-              <%= check_box_tag 'status', category.status, checked = publish?(category), {
+              <%= check_box_tag 'status', category.status, checked = category.publish?, {
                   data: {
                       url: category_publish_path(category),
                       method: :patch,
