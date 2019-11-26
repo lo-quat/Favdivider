@@ -150,7 +150,7 @@ class Tweet < ApplicationRecord
 
   def self.hashtag_index(user)
     hashtags = user.tweets.where("text LIKE ?","%#%").map do |tweet|
-      tweet.text.scan(/#\w+[[:blank:]]|#(?:\p{Hiragana}|\p{Katakana}|[ー－]|[一-龠々])+[[:blank:]]/)
+      tweet.text.scan(/#(\w+|(?:\p{Hiragana}|\p{Katakana}|[ー－]|[一-龠々])+)/)
     end
     hashtags.flatten.group_by{|item| item.downcase}.map{ |key, value| [key, value.count] }.to_h.sort_by{ |key, value| -value}.to_h
   end
