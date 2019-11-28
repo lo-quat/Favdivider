@@ -20,6 +20,8 @@ Twitterのいいね を管理します。
 ![categorize](https://user-images.githubusercontent.com/39546415/69833461-5eda6280-1277-11ea-8e5d-6600cfbbb18e.gif)
 * このサービス内での他ユーザとの共有
 * カテゴリー単位で共有設定切り替え
+  *カテゴリー一覧ではFavdividerユーザーが同名カテゴリーを作成、公開設定している場合、同名カテゴリーツイートをまとめて表示する
+  *ユーザー一覧ではそれぞれのカテゴライズされたツイートを表示する
 ![toggle_publish](https://user-images.githubusercontent.com/39546415/69833468-64d04380-1277-11ea-9389-8175b05eb3ac.gif)
 
 ## なぜ作ったか
