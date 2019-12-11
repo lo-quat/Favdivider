@@ -1,7 +1,29 @@
 # Favdivider
 Twitterのいいね を管理するサービス
+
 [ここ](https://favdivider.herokuapp.com)に公開しています
-いいね の数が15000件以上のアカウントはまだ対応してません
+
+Heroku無料枠のためいいねツイート件数を200件(1回の問い合わせで取得できる最大件数)に制限しています。
+
+いいね全件取得は下記コードのコメントアウトでできます。 
+
+```app/models/tweet.rb#L24
+    # def collect_with_max_id(collection = [], max_id = nil, &block)
+    #   response = yield(max_id)
+    #   collection += response
+    #   response.empty? ? collection.flatten : collect_with_max_id(collection, response.last.id - 1, &block)
+    # end
+    #
+    # # いいね全件取得
+    # def client.get_all_favorites(user)
+    #   collect_with_max_id do |max_id|
+    #     options = {count: 200, tweet_mode: "extended"}
+    #     options[:max_id] = max_id unless max_id.nil?
+    #     favorites(user, options)
+    #   end
+    # end
+
+```
 
 ## 開発環境
 
@@ -30,7 +52,7 @@ Twitterのいいね を管理します。
 特に、サッカーに関するものが多く、各チームの情報を分けて保存しておきたいのです。
 しかし、いざ読み返そうとした時にお気に入りの数が多すぎて探すのに苦労することがよくあったので
 すぐに見つけられるような機能が欲しいと思い作りました。(まだまだ未完成)
-また、私と同じような人にも利用してもらってカテゴライズされた「良い情報」が集まればいいなと思ってます。
+また、私と同じような人にも利用してもらってカテゴライズされた「良い情報」が集まればいいなと思います。
 
 ## 追加したい機能
 
