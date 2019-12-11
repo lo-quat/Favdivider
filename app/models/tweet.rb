@@ -21,22 +21,22 @@ class Tweet < ApplicationRecord
       config.access_token_secret = user.access_token_secret
     end
 
-    def collect_with_max_id(collection = [], max_id = nil, &block)
-      response = yield(max_id)
-      collection += response
-      response.empty? ? collection.flatten : collect_with_max_id(collection, response.last.id - 1, &block)
-    end
+    # def collect_with_max_id(collection = [], max_id = nil, &block)
+    #   response = yield(max_id)
+    #   collection += response
+    #   response.empty? ? collection.flatten : collect_with_max_id(collection, response.last.id - 1, &block)
+    # end
+    #
+    # # いいね全件取得
+    # def client.get_all_favorites(user)
+    #   collect_with_max_id do |max_id|
+    #     options = {count: 200, tweet_mode: "extended"}
+    #     options[:max_id] = max_id unless max_id.nil?
+    #     favorites(user, options)
+    #   end
+    # end
 
-    # いいね全件取得
-    def client.get_all_favorites(user)
-      collect_with_max_id do |max_id|
-        options = {count: 200, tweet_mode: "extended"}
-        options[:max_id] = max_id unless max_id.nil?
-        favorites(user, options)
-      end
-    end
-
-    tweets = client.get_all_favorites(user.uid.to_i)
+    tweets = client.favorites(user.uid.to_i, count: 200, tweet_mode: "extended")
     Tweet.transaction do
       tweets.each do |tweet|
         if Tweet.new_tweet?(user.id, tweet.id)
