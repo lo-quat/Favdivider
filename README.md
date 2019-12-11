@@ -5,9 +5,9 @@ Twitterのいいね を管理するサービス
 
 Heroku無料枠のためいいねツイート件数を200件(1回の問い合わせで取得できる最大件数)に制限しています。
 
-いいね全件取得は下記コードのコメントアウトでできます。 
+いいね全件取得は下記コードのコメントアウトでできます。 (app/models/tweet.rb#L24)
 
-```app/models/tweet.rb#L24
+```
     # def collect_with_max_id(collection = [], max_id = nil, &block)
     #   response = yield(max_id)
     #   collection += response
