@@ -1,11 +1,7 @@
 class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
-    if current_user.sign_in_count == 1
-      Tweet.fetch(current_user)
-    else
-      flash.delete(:notice)
-    end
-      tweets_path
+    current_user.sign_in_count == 1 ? Tweet.fetch(current_user) : flash.delete(:notice)
+    tweets_path
   end
 
   private
