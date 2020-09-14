@@ -12,8 +12,7 @@ class ApplicationController < ActionController::Base
 
   def login_required
     unless current_user
-      flash[:notice] = 'ログインしてください'
-      redirect_to root_url
+      redirect_to root_url, notice: 'ログインしてください'
     end
   end
 end
