@@ -10,10 +10,6 @@ class Category < ApplicationRecord
     unpublish? ? publish! : unpublish!
   end
 
-  def publish?
-    status == 'publish' ? true : false
-  end
-
   def self.merge_same_category_tweet(category_name)
     same_category = Category.where(name: category_name, status: :publish)
     if same_category.count > 1
