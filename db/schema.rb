@@ -12,92 +12,92 @@
 
 ActiveRecord::Schema.define(version: 2019_11_13_150218) do
 
-  create_table "categories", force: :cascade do |t|
-    t.string "name"
-    t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "status", default: 0, null: false
-    t.index ["user_id"], name: "index_categories_on_user_id"
+  create_table 'categories', force: :cascade do |t|
+    t.string 'name'
+    t.integer 'user_id'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.integer 'status', default: 0, null: false
+    t.index ['user_id'], name: 'index_categories_on_user_id'
   end
 
-  create_table "post_users", force: :cascade do |t|
-    t.string "uid"
-    t.string "name"
-    t.string "screen_name"
-    t.string "profile_description"
-    t.string "profile_image"
-    t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_post_users_on_user_id"
+  create_table 'post_users', force: :cascade do |t|
+    t.string 'uid'
+    t.string 'name'
+    t.string 'screen_name'
+    t.string 'profile_description'
+    t.string 'profile_image'
+    t.integer 'user_id'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['user_id'], name: 'index_post_users_on_user_id'
   end
 
-  create_table "relationships", force: :cascade do |t|
-    t.integer "tweet_id"
-    t.integer "category_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["category_id"], name: "index_relationships_on_category_id"
-    t.index ["tweet_id"], name: "index_relationships_on_tweet_id"
+  create_table 'relationships', force: :cascade do |t|
+    t.integer 'tweet_id'
+    t.integer 'category_id'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['category_id'], name: 'index_relationships_on_category_id'
+    t.index ['tweet_id'], name: 'index_relationships_on_tweet_id'
   end
 
-  create_table "tweet_images", force: :cascade do |t|
-    t.string "tweet_image_url"
-    t.integer "tweet_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["tweet_id"], name: "index_tweet_images_on_tweet_id"
+  create_table 'tweet_images', force: :cascade do |t|
+    t.string 'tweet_image_url'
+    t.integer 'tweet_id'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['tweet_id'], name: 'index_tweet_images_on_tweet_id'
   end
 
-  create_table "tweet_videos", force: :cascade do |t|
-    t.string "tweet_video_url"
-    t.integer "tweet_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "thumbnail"
-    t.index ["tweet_id"], name: "index_tweet_videos_on_tweet_id"
+  create_table 'tweet_videos', force: :cascade do |t|
+    t.string 'tweet_video_url'
+    t.integer 'tweet_id'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.string 'thumbnail'
+    t.index ['tweet_id'], name: 'index_tweet_videos_on_tweet_id'
   end
 
-  create_table "tweets", force: :cascade do |t|
-    t.string "post_id"
-    t.datetime "post_created_at"
-    t.string "text"
-    t.integer "favorite_count"
-    t.integer "retweet_count"
-    t.integer "user_id"
-    t.integer "post_user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "status", default: 0, null: false
-    t.boolean "is_quote_status"
-    t.index ["post_user_id"], name: "index_tweets_on_post_user_id"
-    t.index ["user_id"], name: "index_tweets_on_user_id"
+  create_table 'tweets', force: :cascade do |t|
+    t.string 'post_id'
+    t.datetime 'post_created_at'
+    t.string 'text'
+    t.integer 'favorite_count'
+    t.integer 'retweet_count'
+    t.integer 'user_id'
+    t.integer 'post_user_id'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.integer 'status', default: 0, null: false
+    t.boolean 'is_quote_status'
+    t.index ['post_user_id'], name: 'index_tweets_on_post_user_id'
+    t.index ['user_id'], name: 'index_tweets_on_user_id'
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "uid"
-    t.string "provider"
-    t.string "access_token"
-    t.string "access_token_secret"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.string "name"
-    t.string "screen_name"
-    t.string "description"
-    t.integer "sign_in_count", default: 0, null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string "current_sign_in_ip"
-    t.string "last_sign_in_ip"
-    t.string "profile_image"
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  create_table 'users', force: :cascade do |t|
+    t.string 'uid'
+    t.string 'provider'
+    t.string 'access_token'
+    t.string 'access_token_secret'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.string 'email', default: '', null: false
+    t.string 'encrypted_password', default: '', null: false
+    t.string 'reset_password_token'
+    t.datetime 'reset_password_sent_at'
+    t.datetime 'remember_created_at'
+    t.string 'name'
+    t.string 'screen_name'
+    t.string 'description'
+    t.integer 'sign_in_count', default: 0, null: false
+    t.datetime 'current_sign_in_at'
+    t.datetime 'last_sign_in_at'
+    t.string 'current_sign_in_ip'
+    t.string 'last_sign_in_ip'
+    t.string 'profile_image'
+    t.index ['email'], name: 'index_users_on_email', unique: true
+    t.index ['reset_password_token'], name: 'index_users_on_reset_password_token', unique: true
   end
 
 end
