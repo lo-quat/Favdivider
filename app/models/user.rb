@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   has_many :tweets, dependent: :destroy
   has_many :post_users, dependent: :destroy
@@ -10,24 +12,18 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :omniauthable, :trackable
 
   def self.find_for_oauth(auth)
-    user = User.where(uid: auth.uid, provider: auth.provider).first
-
-    unless user
-      user = User.create(
-          uid:      auth.uid,
-          provider: auth.provider,
-          access_token: auth[:credentials][:token],
-          access_token_secret: auth[:credentials][:secret],
-          email:    User.dummy_email(auth),
-          password: Devise.friendly_token[0, 20],
-          name: auth[:info][:name],
-          screen_name: auth[:info][:nickname],
-          description: auth[:info][:description],
-          profile_image: auth[:info][:image]
-      )
+    User.find_or_create_by(uid: auth.uid, provider: auth.provider) do |user|
+      user.uid = auth.uid
+      user.provider = auth.provider
+      user.access_token = auth[:credentials][:token]
+      user.access_token_secret = auth[:credentials][:secret]
+      user.email = User.dummy_email(auth)
+      user.password = Devise.friendly_token[0, 20]
+      user.name = auth[:info][:name]
+      user.screen_name = auth[:info][:nickname]
+      user.description = auth[:info][:description]
+      user.profile_image = auth[:info][:image]
     end
-
-    user
   end
 
   def self.dummy_email(auth)
