@@ -1,6 +1,6 @@
 class TweetsController < ApplicationController
   before_action :login_required
-  before_action :set_tweet, only: [:edit, :toggle_status]
+  before_action :set_tweet, only: %i[edit toggle_status]
 
   def index
     parameters = Parameter.new(params).define_params
