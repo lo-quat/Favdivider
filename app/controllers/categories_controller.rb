@@ -1,19 +1,13 @@
 class CategoriesController < ApplicationController
-  before_action :set_category, only: [:edit, :update, :destroy, :category_publish]
+  before_action :set_category, only: %i[edit update destroy category_publish]
   before_action :login_required
 
   def index
     @categories = current_user.categories
-
-    if params[:id].present?
-      set_category
-    else
-      @category = Category.new
-    end
+    @category = Category.new
   end
 
-  def edit
-  end
+  def edit; end
 
 
   def create
