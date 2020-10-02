@@ -19,7 +19,7 @@
     <% @categories.each do |category| %>
       <tr>
         <td id="category-<%= category.id %>-name"><%= category.name %></td>
-        <td><%= category.tweets.count %></td>
+        <td><%= category.tweets.length %></td>
         <td>
           <div class="switch">
             <label>
