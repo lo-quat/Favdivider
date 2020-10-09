@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Category, type: :model do
@@ -23,9 +25,9 @@ RSpec.describe Category, type: :model do
   it 'is valid with a name, status and user_id' do
     user = @user
     category = user.categories.build(
-        name: 'テスト',
-        status: 0,
-        user_id: 1
+      name: 'テスト',
+      status: 0,
+      user_id: 1
     )
     expect(category).to be_valid
   end
@@ -55,12 +57,12 @@ RSpec.describe Category, type: :model do
   it 'does not allow a single user to have categories which has the same name' do
     user = @user
     user.categories.create(
-        name: 'テスト',
-        user_id: 1
+      name: 'テスト',
+      user_id: 1
     )
     category = user.categories.build(
-        name: 'テスト',
-        user_id: 1
+      name: 'テスト',
+      user_id: 1
     )
     category.valid?
     expect(category.errors[:name]).to include('has already been taken')
@@ -70,13 +72,13 @@ RSpec.describe Category, type: :model do
   it 'does allow each user to have an category which has the same name' do
     user = @user
     user.categories.create(
-        name: 'テスト',
-        user_id: 1
+      name: 'テスト',
+      user_id: 1
     )
     another_user = @another_user
     category = another_user.categories.build(
-        name: 'テスト',
-        user_id: 2
+      name: 'テスト',
+      user_id: 2
     )
     expect(category).to be_valid
   end
